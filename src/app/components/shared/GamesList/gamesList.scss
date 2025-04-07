@@ -1,0 +1,23 @@
+@use 'assets/styles/variables.scss' as *;
+
+.games-list{
+  gap: 15px;
+  padding-bottom: 60px;
+
+  @media screen and (max-width: 768px) {
+    gap: 15px;
+  }
+
+  &.max-rows-2 {
+    max-height: calc((290px * 2) + 50px);
+    overflow-y: auto;
+  }
+
+  &__title {
+    width: 100%;
+    background-color: $primary;
+    color: $white;
+    padding: 20px;
+    margin-top: 0;
+  }
+}

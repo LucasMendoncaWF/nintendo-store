@@ -1,0 +1,20 @@
+[
+  {
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
+    "image": "images/pokemonza.jpg",
+    "title": "Know More!",
+    "price": 80.00
+  },
+  {
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
+    "image": "images/switch.jpeg",
+    "title": "Get yours now!",
+    "price": 399.00
+  },
+  {
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
+    "image": "images/peach.jpg",
+    "title": "Know More!",
+    "price": 80.00
+  }
+]

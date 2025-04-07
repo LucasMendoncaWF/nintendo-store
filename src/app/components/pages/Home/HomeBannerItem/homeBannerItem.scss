@@ -1,0 +1,92 @@
+@use 'assets/styles/variables.scss' as *;
+
+.home-banner {
+  width: calc(100%/3);
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  img {
+    width: 100%;
+    margin-top: -20px;
+    z-index: 1;
+  }
+
+  &__text {
+    z-index: 2;
+    position: absolute;
+    top: 83%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    transition: 0.4s;
+
+    &:hover {
+      top: 30%;
+
+      @media screen and (max-width: 768px) {
+        top: 10%;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    background-color: $white;
+    min-width: 40%;
+    text-align: center;
+    padding: 8px 20px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    cursor: pointer;
+    z-index: 9;
+    font-weight: bold;
+    box-shadow: -3px 1px 8px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &__description {
+    width: 100%;
+    background-color: $white;
+    font-size: 18px;
+    padding: 18px;
+    height: 100%;
+    color: $primary;
+    border-top: 10px solid $white;
+    z-index: 10;
+    position: relative;
+  }
+
+  &__price {
+    color: $primary;
+    font-size: 40px;
+    font-weight: bold;
+    transform: rotate(5deg);
+    text-align: right;
+    font-size: 24px;
+    margin-top: -30px;
+
+    @media screen and (max-width: 768px) {
+      margin-top: -10px;
+    }
+  }
+}
+
+.home-banner:nth-child(odd) {
+  .home-banner__title {
+    color: $white;
+    background-color: $primary;
+  }
+
+  .home-banner__description {
+    border-top: 10px solid $primary;
+  }
+}

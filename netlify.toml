@@ -1,0 +1,11 @@
+[build]
+  functions = "/src/netlify"
+  command = "npm run build"
+  publish = "build"
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Authorization, Client-ID, Content-Type"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"

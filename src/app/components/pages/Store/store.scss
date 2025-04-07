@@ -1,0 +1,5 @@
+@use 'assets/styles/variables.scss' as *;
+
+.store-container {
+  min-height: calc(100vh - 105px);
+}

@@ -1,0 +1,118 @@
+@use 'assets/styles/variables.scss' as *;
+
+.header {
+  padding: 10px 25px;
+  background-color: $white;
+  align-items: center;
+  .header-logo {
+    margin-top: 4px;
+    width: 120px;
+
+    @media screen and (max-width: 768px) {
+      width: 150px;
+      margin-top: 0;
+      margin-bottom: -4px;
+    }
+  }
+
+  .header-links {
+    gap: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: $primary;
+    margin-left: 20px;
+
+    .header-link {
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        transform: scale(1.08) rotate(3deg);
+      }
+    }
+  }
+
+  .sign-in {
+    cursor: pointer;
+    font-size: 16px;
+    color: $primary;
+    font-weight: bold;
+    transition: 0.2s;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid $white;
+
+    .sign-in-icon {
+      width: 18px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    &:hover {
+      border: 1px solid $light-gray;
+      transform: scale(1.08) rotate(5deg);
+    }
+  }
+
+  .mobile-menu {
+    position: relative;
+
+    .mobile-menu-icon {
+      cursor: pointer;
+      background-color: $white;
+      border: 0;
+  
+      .menu-line {
+        background-color: $primary;
+        width: 25px;
+        height: 3px;
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+  
+      &.active {
+        .menu-line:nth-child(1) {
+          transform: rotate(45deg) translate(6px, 6px);
+        }
+  
+        .menu-line:nth-child(3) {
+         transform: rotate(-45deg) translate(4px, -4px);
+        }
+  
+        .menu-line:nth-child(2) {
+          opacity: 0;
+        }
+      }
+    }
+
+    .mobile-links {
+      z-index: 999;
+      position: absolute;
+      background-color: $white;
+      right: -25px;
+      width: 200px;
+      top: 30px;
+      padding: 10px 0;
+      box-shadow: -10px 10px 5px 0px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 0.2s ease-in-out;
+
+      .mobile-link {
+        font-size: 25px;
+        padding: 10px 30px;
+        font-weight: bold;
+        color: $primary;
+        text-align: right;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

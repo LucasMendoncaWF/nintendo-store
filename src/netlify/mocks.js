@@ -1,11 +1,40 @@
-const fs = require("fs");
-const path = require("path");
+const mocks = {
+  secondaryBanners: [
+    {
+      "image": "images/party.jpg",
+      "buttonText": "Access"
+    },
+    {
+      "image": "images/lite.jpg",
+      "buttonText": "Buy"
+    }
+  ],
+  homeBanners: [
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
+      "image": "images/pokemonza.jpg",
+      "title": "Know More!",
+      "price": 80.00
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
+      "image": "images/switch.jpeg",
+      "title": "Get yours now!",
+      "price": 399.00
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
+      "image": "images/peach.jpg",
+      "title": "Know More!",
+      "price": 80.00
+    }
+  ]
+}
 
 exports.handler = async (event) => {
-  const file = event.path.replace("/.netlify/functions/mocks/", "");
+  const eventName = event.path.replace("/.netlify/functions/mocks/", "");
   try {
-    const filePath = path.resolve(__dirname, "mocks", `${file}.json`);
-    const data = fs.readFileSync(filePath, 'utf-8');
+    const data = mocks[eventName];
 
     return {
       statusCode: 200,

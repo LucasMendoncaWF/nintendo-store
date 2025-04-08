@@ -5,6 +5,7 @@ import Store from 'app/components/pages/Store';
 import Footer from '../Footer';
 import Header from '../Header';
 import Wishlist from 'app/components/pages/Wishlist';
+import GameDetails from 'app/components/pages/GameDetails';
 
 export default function Main() {
   return (
@@ -14,9 +15,10 @@ export default function Main() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/list" element={<Store />} />
-          <Route path="/coins" element={<Store />} />
-          <Route path="/support" element={<Store />} />
+          <Route path="/coins" element={<div />} />
+          <Route path="/support" element={<div />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/game/:id" element={<GameDetails />} />
         </Routes>
       </div>
       <Footer />

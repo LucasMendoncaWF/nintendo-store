@@ -24,7 +24,7 @@ export default function Header() {
         </div>
       </Link>
 
-      <div className='mobile-menu show-mobile'>
+      <div className='mobile-menu show-mobile' onMouseLeave={() => setIsMobileMenuOpen(false)}>
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={'mobile-menu-icon' + (isMobileMenuOpen ? ' active' : '')}>
           <div className='menu-line'></div>
           <div className='menu-line'></div>
@@ -34,7 +34,7 @@ export default function Header() {
           <div className='mobile-links'>
             <Link to='/list'><div className="mobile-link">Store</div></Link>
             <Link to='/support'><div className="mobile-link">Support</div></Link> 
-            <Link to='/offers'><div className="mobile-link">Offers</div></Link>
+            <Link to='/coins'><div className="mobile-link">Coins</div></Link>
             <Link to='/offers'><div className="mobile-link">Sign In</div></Link>
           </div>
         }

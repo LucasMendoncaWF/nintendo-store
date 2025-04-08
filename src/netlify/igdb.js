@@ -32,41 +32,22 @@ exports.handler = async (event) => {
   };
   const requestBody = event.body ? JSON.parse(event.body) : {};
 
-  let where = '';
-  if(!requestBody.ids && requestBody.filters) {
-    const filters = [];
-    Object.keys(requestBody.filters).forEach((key) => {
-      if(key === 'name' || key === 'genres') {
-        return;
-      }
-      if (requestBody.filters[key]) {
-        filters.push(`${key} = ${requestBody.filters[key]}`);
-      }
-    });
-    where = `where ${filters.join(' & ')} & first_release_date < ${(new Date().getTime() / 1000).toFixed()};`;
-  }
-
   let newBody = '';
-  newBody +=`fields ${requestBody.fields}; ${where}`;
-  if(requestBody.filters.name) {
-    newBody+= `search "${requestBody.filters.name}"; `
-  } else if(!requestBody.ids){
-    newBody+= `sort ${requestBody.sort};`; 
+  if(requestBody.filters?.name) {
+    newBody+= `search "${requestBody.filters?.name}"; `
+  }
+  newBody +=`fields ${requestBody.fields}; `;
+  newBody+= `where platforms = 130 & first_release_date < ${(new Date().getTime() / 1000).toFixed()}${requestBody.ids? ` & id=(${requestBody.ids.join(', ')})` : ''}; `
+  if(!requestBody.filters?.name && requestBody.sort){
+    newBody+= `sort ${requestBody.sort}; `; 
+  }
+  if(requestBody.limit) {
+    newBody += `limit ${requestBody.limit}; `;
+  }
+  if(requestBody.offset !== undefined) {
+    newBody += ` offset ${requestBody.offset}; `;
   }
 
-  
-  if(requestBody.ids) {
-    where += `id [${requestBody.ids.join(', ')}];`
-  }
-  
-  newBody += `${where}`;
-
-  newBody += `limit ${requestBody.limit};`;
-
-  if(requestBody.offset) {
-    newBody += ` offset ${requestBody.offset};`
-  }
-  console.log(newBody)
   try {
     if (event.httpMethod === "OPTIONS") {
       return {

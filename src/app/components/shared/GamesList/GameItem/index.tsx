@@ -21,7 +21,7 @@ export default function GameItem ({
   isOnWishList,
 }: Props) {
   const [heartIcon, setHeartIcon] = useState(heart);
-  const [addedToCart, setAddedToCart] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false);
 
   useEffect(() => {
     setHeartIcon(isOnWishList ? heartFilled : heart);
@@ -30,14 +30,14 @@ export default function GameItem ({
 
   const releaseDate = new Date(game.first_release_date * 1000);
   const imageUrl =  game.cover?.url ? game.cover.url.replace('t_thumb', 't_720p') : noImage;
-  const formatedDate = releaseDate.toLocaleDateString();
+  const formattedDate = releaseDate.toLocaleDateString();
   return (
     <div className="game-item">
-      <Link to=''>
+      <Link to={`/game/${game.id}`}>
       <div className={`game-item__container ${addedToCart ? 'added' : ''}`}>
         <div className="game-item__image" style={{backgroundImage: `url(${imageUrl})`}}> </div>
         <div className="game-item__info">
-          <p className="game-item__date">{formatedDate}</p>
+          <p className="game-item__date">{formattedDate}</p>
           <h3>{game.name}</h3>
           <p className="game-item__price">${game.price}</p>
           <div className="d-flex space-between">

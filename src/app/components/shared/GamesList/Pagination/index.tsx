@@ -10,7 +10,7 @@ export default function Pagination ({
   totalPages,
   onPageChange,
 }: Props) {
-  const lastPage = Number(totalPages.toFixed(0));
+  const lastPage = Math.ceil(totalPages);
   const pagesRendered = () => {
     let pageRendered = currentPage < 3 ? 3 : currentPage;
     let hideLastPage = false;
@@ -22,13 +22,22 @@ export default function Pagination ({
     if(currentPage > lastPage - 8) {
       hideLastPage = true;
     }
-    const rendered: {value: number, isLast?: boolean}[] =  [
+    let rendered: {value: number, isLast?: boolean}[] =  [
       {value: pageRendered-2},
       {value: pageRendered-1},
       {value: pageRendered},
       {value: pageRendered+1},
       {value: pageRendered+2},
     ];
+
+    if(totalPages < 5) {
+      const result = Array.from({ length: Math.ceil(totalPages) }, (_, i) => i + 1);
+      rendered = result.map(number => {
+        return {
+          value: number, 
+        }
+      })
+    }
 
     if(!hideLastPage) {
       rendered.push({value: lastPage, isLast: true});
@@ -43,8 +52,8 @@ export default function Pagination ({
       {pages?.map(page => 
         <button className={currentPage === page.value ? 'selected' : ''} onClick={() => onPageChange(page.value)} key={page.value}>{page.isLast && '...'} {page.value}</button>
       )}
-      <button className='pagination__arrow' onClick={() => currentPage < Math.round(lastPage) && onPageChange(currentPage+1)}>&gt;</button>
-      <button className='pagination__arrow' onClick={() => currentPage < Math.round(lastPage) && onPageChange(lastPage)}>&gt;&gt;</button>
+      <button className='pagination__arrow' onClick={() => currentPage < Math.ceil(lastPage) && onPageChange(currentPage+1)}>&gt;</button>
+      <button className='pagination__arrow' onClick={() => currentPage < Math.ceil(lastPage) && onPageChange(lastPage)}>&gt;&gt;</button>
     </div>
   )
 }

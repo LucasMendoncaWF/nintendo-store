@@ -1,0 +1,122 @@
+@use 'assets/styles/variables.scss' as *; 
+
+.game-detail {
+  &__banner {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: $primary;
+    animation: loadBanner 1.5s infinite;
+
+    @media screen and (max-width: 850px) {
+      margin-bottom: 380px;
+      height: 300px;
+    }
+  }
+
+  &__info {
+    position: absolute;
+    bottom: 0;
+    background-color: $white;
+    padding: 50px;
+    border-top-right-radius: 50px;
+    width: 45%;
+    box-shadow: 6px -6px 8px #00000057;
+    @media screen and (max-width: 850px) {
+      position: relative;
+      width: calc(90% - 100px);
+      bottom: unset;
+      top: calc(100% - 80px);
+      border-bottom-right-radius: 50px;
+    }
+  }
+
+  &__price {
+    margin: 25px 0;
+    font-size: 30px;
+    font-weight: bold;
+    transform: rotate(4deg);
+    transform-origin: 0 0;
+  }
+
+  &__name {
+    color: $primary;
+    line-clamp: 2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+
+  &__summary {
+    color: $gray;
+    line-clamp: 3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }
+
+  &__tags {
+    margin-top: 10px;
+    gap: 2px;
+  }
+
+  &__add-wishlist {
+    border: 0;
+    background: transparent;
+    img {
+      width: 25px;
+      height: 25px;
+      opacity: 0.94;
+    }
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__add-cart {
+    color: $black;
+    font-size: 18px;
+    padding: 0;
+    padding-bottom: 2px;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid $primary;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &.on-cart {
+      border-bottom: 2px solid $green;
+      &:hover {
+        text-decoration: line-through;
+      }
+    }
+
+    &:hover {
+      border-bottom: 2px solid $green;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes loadBanner {
+    0%{
+      background-color: $primary;
+    }
+
+    50% {
+      background-color: $primary-darker;
+    }
+
+    100% {
+      background-color: $primary;
+    }
+  }
+
+}

@@ -1,24 +1,36 @@
 import { getHomeBanners, getSecondaryBanners } from 'app/services/banners';
 import HomeBannerItem from './HomeBannerItem';
 import SecondaryBannerItem from './SecondaryBannerItem';
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { HomeBannerModel } from 'app/models/HomeBannerModel';
 import GamesList from 'app/components/shared/GamesList';
 import Loader from 'app/components/shared/Loader';
+import { getRecentGamesList } from 'app/services/gamesSearch';
+import { GameModel } from 'app/models/gameModel';
 
 export default function Home () {
   const [banners, setBanners] = useState<HomeBannerModel[]>([]);
   const [secondaryBanners, setSecondaryBanners] = useState<HomeBannerModel[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const timesLoaded = useRef(0)
+  const [games, setGames] = useState<GameModel[]>([]);
+  const [hasError, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    if(timesLoaded.current > 0) return;
-    timesLoaded.current += 1;
-    geBanners();
-  })
+  const getGames = useCallback(async () => {
+    const gamesResponse = await getRecentGamesList();
+    setIsLoading(false);
+    if(gamesResponse.status) {
+      setGames([]);
+      setError(true);
+      return;
+    }
 
-  const geBanners = async () => {
+    if(gamesResponse) {
+      setGames(gamesResponse);
+      setError(false);
+    }
+  }, []);
+
+  const geBanners = useCallback(async () => {
     const bannersResponse = await getHomeBanners();
     if(bannersResponse) {
       setBanners(bannersResponse.data);
@@ -29,7 +41,12 @@ export default function Home () {
       setSecondaryBanners(secondaryBannersResponse.data);
     }
     setIsLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    getGames();
+    geBanners();
+  }, [getGames, geBanners])
 
   return (
     <div className="home">
@@ -47,7 +64,13 @@ export default function Home () {
         ))}
       </div>
       <div className='margin-top'>
-        <GamesList type='recent'/>
+        <GamesList
+          games={games}
+          hasError={hasError}
+          isEmptyResponse={!hasError && !isLoading && !games.length}
+          isLoading={isLoading}
+          title='New Games'
+        />
       </div>
     </div>
   );

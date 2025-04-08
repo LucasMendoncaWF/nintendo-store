@@ -19,7 +19,6 @@ export interface GameGenreModel {
 export interface FiltersModel {
   page: number;
   searchTerm?: string;
-  genres?: number[];
   sort?: 'desc' | 'asc';
   totalPages?: number;
   ids?: number[];

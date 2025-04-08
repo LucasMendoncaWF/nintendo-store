@@ -11,6 +11,12 @@ export default function Footer() {
           <Link to='/support'><div className="footer__link">Support</div></Link>
           <Link to='/coins'><div className="footer__link">Coins</div></Link>
         </div>
+
+        <div>
+          <div className='footer__text'>User</div>
+          <Link to='/wishlist'><div className="footer__link">Wishlist</div></Link>
+          <Link to='/cart'><div className="footer__link">Cart</div></Link>
+        </div>
       </div>
     </div>
   )

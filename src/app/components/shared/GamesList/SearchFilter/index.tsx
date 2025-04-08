@@ -12,15 +12,13 @@ let timeout: ReturnType<typeof setTimeout>;
 export default function SearchFilter ({onSetSearchTerm}: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [internSearchTerm, setInternSearchTerm] = useState('');
-  const isEditing = useRef(false);
+  const addedFromUrl = useRef(false);
 
   useEffect(() => {
     if(timeout) {
       clearTimeout(timeout);
     }
-    isEditing.current = true;
     timeout = setTimeout(() => {
-      isEditing.current = false;
       onSetSearchTerm(internSearchTerm);
       setSearchParams(internSearchTerm ? {searchQuery: internSearchTerm} : {});
     }, 300);
@@ -28,8 +26,9 @@ export default function SearchFilter ({onSetSearchTerm}: Props) {
 
   useEffect(() => {
     const value = searchParams.get('searchQuery');
-    if(value && !internSearchTerm && !isEditing) {
+    if(value && !internSearchTerm && !addedFromUrl.current) {
       setInternSearchTerm(value);
+      addedFromUrl.current=true;
     }
   }, [searchParams, internSearchTerm])
 

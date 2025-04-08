@@ -11,7 +11,7 @@ interface Props {
 let timeout: ReturnType<typeof setTimeout>;
 export default function SearchFilter ({onSetSearchTerm}: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [internSearchTerm, setInternSearchTerm] = useState('');
+  const [internSearchTerm, setInternSearchTerm] = useState<string | undefined>(undefined);
   const addedFromUrl = useRef(false);
 
   useEffect(() => {
@@ -19,8 +19,10 @@ export default function SearchFilter ({onSetSearchTerm}: Props) {
       clearTimeout(timeout);
     }
     timeout = setTimeout(() => {
-      onSetSearchTerm(internSearchTerm);
-      setSearchParams(internSearchTerm ? {searchQuery: internSearchTerm} : {});
+      if(internSearchTerm !== undefined) {
+        onSetSearchTerm(internSearchTerm);
+        setSearchParams(internSearchTerm ? {searchQuery: internSearchTerm} : {});
+      }
     }, 300);
   }, [internSearchTerm, onSetSearchTerm, setSearchParams]);
 

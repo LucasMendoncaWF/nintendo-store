@@ -7,6 +7,7 @@ import { useReducer, useRef, useState } from 'react';
 export default function Coins () {
   const [appearCoin, setAppearCoin] = useState(false);
   const sessionAmount = sessionStorage.getItem('coins');
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [amount, setAmount] = useState(sessionAmount ? Number(sessionAmount) : 0);
   const maxCoin = 200;
   const isCollecting = useRef(false);
@@ -35,10 +36,10 @@ export default function Coins () {
       </div>
       <div className='coin-page__collector-area'>
         <div className='coin-page__collector-area__container'>
-          <div className={`coin-page__collector-area__container__amount ${appearCoin && 'appear'}`}>{amount}</div>
+          {imageLoaded && <div className={`coin-page__collector-area__container__amount ${appearCoin && 'appear'}`}>{amount}</div>}
           <img className={`image-back ${appearCoin && 'appear'}`} alt="coin container" src={CoinsContainerBack} />
           <div className={`coin-page__coin ${appearCoin && 'appear'}`}/>
-          <img className={`image-front ${appearCoin && 'appear'}`}  alt="coin container" src={CoinsContainer} />
+          <img className={`image-front ${appearCoin && 'appear'}`} onLoad={() => setImageLoaded(true)} alt="coin container" src={CoinsContainer} />
         </div>
         <div>
           <button onClick={() => !isCollecting.current && onGetCoin()} disabled={amount >= maxCoin || isCollecting.current} className='coin-page__collector-area__button'>

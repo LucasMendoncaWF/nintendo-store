@@ -24,6 +24,9 @@
 
   &__banner {
     width: 100%;
+    min-height: 12vh;
+    background-color: $primary;
+    animation: loadBanner 1.5s infinite;
 
     img {
       width: 100%;

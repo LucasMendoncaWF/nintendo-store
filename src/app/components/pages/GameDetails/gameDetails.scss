@@ -105,18 +105,4 @@
     }
   }
 
-  @keyframes loadBanner {
-    0%{
-      background-color: $primary;
-    }
-
-    50% {
-      background-color: $primary-darker;
-    }
-
-    100% {
-      background-color: $primary;
-    }
-  }
-
 }

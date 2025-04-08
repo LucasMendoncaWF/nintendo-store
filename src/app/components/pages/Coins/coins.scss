@@ -1,0 +1,228 @@
+@use './assets/styles/variables.scss' as *;
+
+.coin-page {
+  &__title {
+    color: $white;
+    background-color: $primary;
+    padding: 20px;
+    font-size: 25px;
+    margin: 0;
+  }
+
+  &__text {
+    padding: 20px;
+    margin-top: 120px;
+    padding-bottom: 60px;
+    letter-spacing: 2px;
+    color: $gray;
+
+    @media screen and (max-width: 800px) {
+      margin-top: 30px;
+      padding: 0 25px 60px;
+    }
+  }
+
+  &__banner {
+    width: 100%;
+
+    img {
+      width: 100%;
+      margin-bottom: -5px;
+    }
+  }
+
+  &__coin {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(90deg, rgba(255,179,0,1) 0%, rgba(254,255,0,1) 100%);
+    border-radius: 50%;
+    border: 6px solid black;
+    position: absolute;
+    box-shadow: 3px 3px 7px 0px rgba(68, 68, 68, 0.8);
+    top: -120px;
+    left: calc(50% - 43px);
+    z-index: 1;
+    opacity: 0;
+
+    &.appear {
+      opacity: 1;
+      animation: coinAppear 2s;
+    }
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 40px;
+      background-color: $black;
+      position: absolute;
+      left: calc(50% - 3px);
+      top: calc(50% - 20px);
+      border-radius: 40px;
+    }
+  }
+
+  &__collector-area {
+    margin-bottom: 100px;
+    background-color: $primary;
+    padding: 50px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 1100px) {
+      padding: 50px 10%;
+    }
+
+    @media screen and (max-width: 800px) {
+      margin-bottom: 0px;
+      padding: 50px 25px;
+      display: block;
+    }
+
+    &__button {
+      padding: 20px 30px;
+      font-size: 30px;
+      color: $white;
+      border: 3px solid $white;
+      border-radius: 130px;
+      cursor: pointer;
+      background: transparent;
+      transition: 0.4s;
+      margin-left: 100px;
+
+      @media screen and (max-width: 800px) {
+        margin-top: 120px;
+        width: 100%;
+        margin-left: 0;
+      }
+
+      &:disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+      }
+
+      &:hover {
+        background-color: $white;
+        color: $black;
+      }
+    }
+    
+    &__container {
+      position: relative;
+      width: 300px;
+      margin-bottom: -120px;
+
+      @media screen and (max-width: 800px) {
+        margin-left: calc(50% - 150px);
+      }
+
+      img {
+        width: 100%;
+      }
+
+      .image-back {
+        width: 300px;
+        position: absolute;
+        left: 0px;
+        top: 	0;
+
+        &.appear {
+          animation: containerMove 2s;
+        }
+      }
+
+      .image-front {
+        width: 300px;
+        z-index: 9;
+        position: relative;
+
+        &.appear {
+          animation: containerMove 2s;
+        }
+      }
+
+      &__amount {
+        font-size: 30px;
+        font-weight: bold;
+        position: absolute;
+        left: 50%;
+        bottom: 78px;
+        z-index: 10;
+
+        &.appear {
+          animation: amountMove 2s;
+        }
+      }
+    }
+  }
+
+  @keyframes coinAppear {
+    0% {
+      opacity: 0;
+      transform:scale(0.4) rotate(-140deg);
+      top: -120px;
+    }
+
+    10% {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+      top: -160px;
+    }
+
+    30% {
+      transform:scale(0.5) rotate(-140deg);
+      top: 110px;
+    }
+
+    50% {
+      transform: scale(0.5);
+      top: 110px;
+    }
+
+    70% {
+      transform: scale(1);
+      top: 90px;
+      opacity: 1;
+    }
+
+    90% {
+      transform: scale(1);
+      top: 90px;
+      opacity: 0;
+    }
+
+    100% {
+      transform: scale(1) rotate(calc(140 * -4)deg);
+      top: 90px;
+      opacity: 0;
+    }
+  }
+
+  @keyframes containerMove {
+    0% {
+      transform: scale(1) rotate(0);
+    }
+
+    28% {
+      transform: scale(1) rotate(0);
+    }
+
+    36% {
+      transform: scale(1.1) rotate(0) translateY(20px);
+    }
+  }
+
+  @keyframes amountMove {
+    0% {
+      transform: scale(1) rotate(0);
+    }
+
+    28% {
+      transform: scale(1) rotate(0);
+    }
+
+    36% {
+      transform: scale(1.4) rotate(0) translateY(22px);
+    }
+  }
+}

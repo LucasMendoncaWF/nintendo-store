@@ -3,3 +3,16 @@
 .store-container {
   min-height: calc(100vh - 105px);
 }
+
+.store-link {
+  color: $primary;
+  width: 100%;
+  text-align: center;
+  margin-top: -40px;
+  text-decoration: underline;
+  font-size: 18px;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

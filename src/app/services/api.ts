@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAuth, getToken } from "./authService";
 
 const api = axios.create({
-  baseURL: "http://localhost:8888/.netlify/functions/",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 api.interceptors.request.use(

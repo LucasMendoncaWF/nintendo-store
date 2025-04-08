@@ -64,13 +64,14 @@ export default function GamesList ({type, searchTerm, setCurrentPage, currentPag
       recent: () => getRecentGamesList(),
       similar: () => getRecentGamesList(),
       all: () => getAllGames({searchTerm, page: renderPage}),
-      wishlist: () => getRecentGamesList(),
+      wishlist: () => getAllGames({searchTerm, page: renderPage, ids: JSON.parse(sessionStorage.getItem('wishlist') || '')}),
     }
 
     const gamesResponse = await functions[type]();
     if(gamesResponse.status) {
       setGames([]);
       setError(true);
+      setIsLoading(false);
       return;
     }
 
@@ -105,9 +106,9 @@ export default function GamesList ({type, searchTerm, setCurrentPage, currentPag
   }, [currentPage, getGames, type]);
   
 
-  const isListAll = type === 'all';
+  const hasPagination = type !== 'recent' && type !== 'similar';
   const isEmptyResponse = !isLoading && !hasError && games.length === 0;
-  const showPagination = isListAll && !isLoading && !hasError && totalPages > 1 && games.length !== 0;
+  const showPagination = hasPagination && !isLoading && !hasError && totalPages > 1 && games.length !== 0;
   return (
     <div>
       <div className='d-flex wrap games-list justify-content-center'> 

@@ -12,16 +12,17 @@ export async function getRecentGamesList() {
   });
 }
 
+
 export async function getAllGames({
   page,
   genres,
   searchTerm,
-  sort
+  sort,
+  ids
 }: FiltersModel) {
   const pageSize = 28;
   const currentSort = sort || 'desc';
-  const query = {fields: '*, cover.url, genres.name', filters : {platforms : 130, name: searchTerm, genres}, sort: 'first_release_date ' + currentSort, limit: pageSize, offset: pageSize * (page - 1)};
-  
+  const query = {fields: '*, cover.url, genres.name', ids, filters : {platforms : 130}, name: searchTerm, genres, sort: 'first_release_date ' + currentSort, limit: pageSize, offset: pageSize * (page - 1)};
   return await api.post<GameModel[]>("igdb/games", 
       query
     ).then(response => {

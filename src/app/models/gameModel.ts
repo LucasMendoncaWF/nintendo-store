@@ -22,4 +22,5 @@ export interface FiltersModel {
   genres?: number[];
   sort?: 'desc' | 'asc';
   totalPages?: number;
+  ids?: number[];
 }

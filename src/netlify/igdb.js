@@ -31,8 +31,9 @@ exports.handler = async (event) => {
     "Client-ID": event.headers?.["client-id"] || ""
   };
   const requestBody = event.body ? JSON.parse(event.body) : {};
+
   let where = '';
-  if(requestBody.filters) {
+  if(!requestBody.ids && requestBody.filters) {
     const filters = [];
     Object.keys(requestBody.filters).forEach((key) => {
       if(key === 'name' || key === 'genres') {
@@ -42,16 +43,25 @@ exports.handler = async (event) => {
         filters.push(`${key} = ${requestBody.filters[key]}`);
       }
     });
-    where = `where ${filters.join(' & ')} & first_release_date < ${(new Date().getTime() / 1000).toFixed()}`;
+    where = `where ${filters.join(' & ')} & first_release_date < ${(new Date().getTime() / 1000).toFixed()};`;
   }
+
   let newBody = '';
+  newBody +=`fields ${requestBody.fields}; ${where}`;
   if(requestBody.filters.name) {
     newBody+= `search "${requestBody.filters.name}"; `
-  } else {
+  } else if(!requestBody.ids){
     newBody+= `sort ${requestBody.sort};`; 
   }
 
-   newBody +=`fields ${requestBody.fields}; ${where}; limit ${requestBody.limit};`;
+  
+  if(requestBody.ids) {
+    where += `id [${requestBody.ids.join(', ')}];`
+  }
+  
+  newBody += `${where}`;
+
+  newBody += `limit ${requestBody.limit};`;
 
   if(requestBody.offset) {
     newBody += ` offset ${requestBody.offset};`

@@ -34,7 +34,7 @@ const mocks = {
 exports.handler = async (event) => {
   const eventName = event.path.replace("/.netlify/functions/mocks/", "");
   try {
-    const data = mocks[eventName];
+    const data = JSON.stringify(mocks[eventName]);
 
     return {
       statusCode: 200,

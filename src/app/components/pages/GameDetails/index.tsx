@@ -8,6 +8,7 @@ import heartFilled from 'assets/images/heart_filled.png';
 import './gameDetails.scss'
 import GameTag from "app/components/shared/GameTag";
 import Loader from "app/components/shared/Loader";
+import ErrorMessage from "app/components/shared/ErrorMessage";
 
 export default function GameDetails () {
   const params = useParams();
@@ -114,8 +115,12 @@ export default function GameDetails () {
     <div>
       <div className="game-detail__banner" style={{backgroundImage: `url(${imageUrl})`}}>
         <div className="game-detail__info">
-          {isLoading ?
-            <Loader /> :
+          {hasError ? 
+          <ErrorMessage message="An error occurred while getting the game details" />
+          :
+          isLoading ?
+            <Loader /> 
+            :
             <>
               <p className="game-detail__date">{formattedDate}</p>
               <div className="d-flex wrap game-detail__tags">

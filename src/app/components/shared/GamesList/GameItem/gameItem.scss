@@ -6,6 +6,9 @@
   width: calc((100% / 7) - 19px);
   margin-bottom: 30px;
 
+  $border: 3px;
+  $borderX: calc($border * 2);
+
   &__container{
     overflow: hidden;
     width: 100%;
@@ -13,7 +16,7 @@
     border: none;
     height: 100%;
     padding: 0;
-    border: 3px solid $primary-darker;
+    border: $border solid $primary-darker;
     border-radius: 20px;
     margin-bottom: 10px;
     transition: 0.3s;
@@ -31,28 +34,26 @@
   }
 
   @media screen and (max-width: 1500px) {
-    min-width: calc((100% / 6) - 24px);
+    min-width: calc((100% / 6) - 24px - $borderX);
   }
 
   @media screen and (max-width: 1300px) {
-    min-width: calc((100% / 5) - 30px);
+    min-width: calc((100% / 5) - 30px - $borderX);
   }
 
   @media screen and (max-width: 1000px) {
-    min-width: calc((100% / 4) - 30px);
+    min-width: calc((100% / 4) - 30px - $borderX);
   }
 
   @media screen and (max-width: 850px) {
-    min-width: calc((100% / 3) - 30px);
+    min-width: calc((100% / 3) - 30px - $borderX);
   }
 
   @media screen and (max-width: 768px) {
-    min-width: calc((100% / 2) - 30px);
+    min-width: calc(80% - 30px - $borderX);
+    margin-left: -5px;
   }
 
-  @media screen and (max-width: 400px) {
-    min-width: calc(80% - 30px);
-  }
 
   &__add-wishlist {
     border: 0;

@@ -26,21 +26,6 @@ export default function GameDetails () {
 
   const [heartIcon, setHeartIcon] = useState(heart);
 
-   const getGames = useCallback(async () => {
-    const gamesResponse = await getRecentGamesList();
-    setIsLoadingList(false);
-    if(gamesResponse.status) {
-      setGamesList([]);
-      setErrorList(true);
-      return;
-    }
-
-    if(gamesResponse) {
-      setGamesList(gamesResponse);
-      setErrorList(false);
-    }
-  }, []);
-
   const getGame = useCallback(async () => {
     if(!params.id) {
       setGame({} as GameModel);
@@ -60,6 +45,21 @@ export default function GameDetails () {
       setIsLoading(false);
     }
   }, [params.id]);
+
+  const getSimilarGames = useCallback(async () => {
+    const gamesResponse = await getRecentGamesList();
+    setIsLoadingList(false);
+    if(gamesResponse.status) {
+      setGamesList([]);
+      setErrorList(true);
+      return;
+    }
+
+    if(gamesResponse) {
+      setGamesList(gamesResponse);
+      setErrorList(false);
+    }
+  }, []);
 
   const onAddToWishlist = (e: React.MouseEvent, gameId: number) => {
     e.stopPropagation();
@@ -90,21 +90,21 @@ export default function GameDetails () {
     setInCart(newCart);
   }
 
-
   useEffect(() => {
     getGame();
-    getGames();
+    getSimilarGames();
 
     const sessionWishList = sessionStorage.getItem('wishlist');
     const parsedWishList = sessionWishList? JSON.parse(sessionWishList) : [];
-    setInWishlist(parsedWishList)
+    setInWishlist(parsedWishList);
+    setHeartIcon(parsedWishList.includes(game.id) ? heartFilled : heart);
+
     const sessionCart = sessionStorage.getItem('cart');
     const parsedCart = sessionCart? JSON.parse(sessionCart) : [];
     setInCart(parsedCart);
-    setHeartIcon(parsedWishList.includes(game.id) ? heartFilled : heart)
 
     window.scrollTo({behavior: 'smooth', top: 0})
-  }, [getGame, getGames, game.id]);
+  }, [getGame, getSimilarGames, game.id]);
 
   const releaseDate = new Date(game.first_release_date * 1000);
   const imageUrl =  game.cover?.url ? game.cover.url.replace('t_thumb', 't_1080p') : '';

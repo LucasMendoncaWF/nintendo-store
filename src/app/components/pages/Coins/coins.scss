@@ -37,15 +37,16 @@
   &__coin {
     width: 80px;
     height: 80px;
-    background: linear-gradient(90deg, rgba(255,179,0,1) 0%, rgba(254,255,0,1) 100%);
+    background: linear-gradient(90deg, rgb(255, 255, 255) 0%,rgb(155, 155, 154) 100%);
     border-radius: 50%;
     border: 6px solid black;
     position: absolute;
-    box-shadow: 3px 3px 7px 0px rgba(68, 68, 68, 0.8);
+    box-shadow: -7px -4px 7px 0px rgb(0 0 0 / 39%);
     top: -120px;
     left: calc(50% - 43px);
     z-index: 1;
     opacity: 0;
+    transition: 2s;
 
     &.appear {
       opacity: 1;
@@ -155,6 +156,22 @@
         &.appear {
           animation: amountMove 2s;
         }
+
+        &__per-click {
+          font-size: 18px;
+          font-weight: bold;
+          position: absolute;
+          left: 50%;
+          bottom: 120px;
+          z-index: 10;
+          color: $white;
+          text-shadow: 2px 2px black;
+          opacity: 0;
+
+          &.appear {
+            animation: plusText 2s;
+          }
+        }
       }
     }
   }
@@ -162,41 +179,35 @@
   @keyframes coinAppear {
     0% {
       opacity: 0;
-      transform:scale(0.4) rotate(-140deg);
-      top: -120px;
-    }
-
-    10% {
-      opacity: 1;
-      transform: scale(1) rotate(0);
-      top: -160px;
+      scale: 0.1;
+      rotate: 0deg;
+      top: -25px;
     }
 
     30% {
-      transform:scale(0.5) rotate(-140deg);
-      top: 110px;
+      scale: 1;
+      top: -160px;
     }
 
     50% {
-      transform: scale(0.5);
+      rotate: 540deg;
       top: 110px;
     }
 
     70% {
-      transform: scale(1);
+      scale: 1;
       top: 90px;
       opacity: 1;
     }
 
     90% {
-      transform: scale(1);
       top: 90px;
       opacity: 0;
     }
 
     100% {
-      transform: scale(1) rotate(calc(140 * -4)deg);
       top: 90px;
+      rotate: 540deg;
       opacity: 0;
     }
   }
@@ -226,6 +237,31 @@
 
     36% {
       transform: scale(1.4) rotate(0) translateY(22px);
+    }
+  }
+
+  @keyframes plusText {
+    30% {
+      transform: scale(0.2);
+      opacity: 0;
+      bottom: 100px;
+    }
+
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    80% {
+      opacity: 1;
+    }
+
+
+    100% {
+      transform: scale(1);
+      bottom: 160px;
+      opacity: 0;
+
     }
   }
 }

@@ -25,7 +25,7 @@ export default function Coins () {
       setTimeout(() => {
         setAppearCoin(false);
         isCollecting.current = false;
-      }, 1900);
+      }, 2000);
     }
   }
 
@@ -39,7 +39,7 @@ export default function Coins () {
         <div className='coin-page__collector-area__container'>
           {imageLoaded && <div className={`coin-page__collector-area__container__amount__per-click ${appearCoin && 'appear'}`}>+{amountPerClick}</div>}
           {imageLoaded && <div className={`coin-page__collector-area__container__amount ${appearCoin && 'appear'}`}>{amount}</div>}
-          <img className={`image-back ${appearCoin && 'appear'}`} alt="coin container" src={CoinsContainerBack} />
+          {imageLoaded && <img className={`image-back ${appearCoin && 'appear'}`} alt="coin container" src={CoinsContainerBack} />}
           <div className={`coin-page__coin ${appearCoin && 'appear'}`}/>
           <img className={`image-front ${appearCoin && 'appear'}`} onLoad={() => setImageLoaded(true)} alt="coin container" src={CoinsContainer} />
         </div>

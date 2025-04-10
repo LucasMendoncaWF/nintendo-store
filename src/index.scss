@@ -41,20 +41,20 @@ a {
 }
 
 .hide-mobile {
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     display: none;
   }
 }
 
 .show-mobile {
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     display: none;
   }
 }
 
 .container {
   margin: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     margin: 15px;
   }
 }
@@ -74,7 +74,7 @@ h1, h2, h3, h4 {
 .margin-top-2 {
   margin-top: 50px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     margin-top: 25px;
   }
 }
@@ -82,7 +82,7 @@ h1, h2, h3, h4 {
 .margin-bottom-2 {
   margin-bottom: 50px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     margin-bottom: 25px;
   }
 }

@@ -15,20 +15,23 @@ const mocks = {
     {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
       "image": "/images/pokemon.jpg",
-      "title": "Know More!",
+      "buttonText": "Know More!",
       "url": "/game/144054",
+      "title": "Pokemon Arceus",
     },
     {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
       "image": "/images/switch.jpeg",
-      "title": "Get yours now!",
+      "buttonText": "Get yours now!",
       "url": "/product/1",
+      "title": "Nintendo Switch OLED",
     },
     {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
       "image": "/images/peach.jpg",
-      "title": "Know More!",
+      "buttonText": "Know More!",
       "url": "/game/254340",
+      "title": "Peach Show Time!",
     }
   ]
 }

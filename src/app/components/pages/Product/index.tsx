@@ -9,7 +9,6 @@ export default function Product () {
     data: product,
   } = useGetProduct(params.id || '');
 
-  console.log(product)
   return (
     <div className='product-page'>
       <h3 className='product-page__title'>{product?.title}</h3>
@@ -21,13 +20,14 @@ export default function Product () {
           {product?.text}
         </div>
       </div>
+      
       <div className='product-page__container d-flex'>
-        <button className='product-page__button'>Get one now!</button>
+        <div className='product-page__text product-page__text--second'>
+            {product?.text2}
+        </div>
       </div>
       <div className='product-page__container d-flex'>
-      <div className='product-page__text product-page__text--second'>
-          {product?.text2}
-        </div>
+        <button className='product-page__button'>Get yours now!</button>
       </div>
     </div>
   )

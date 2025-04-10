@@ -5,7 +5,6 @@ export default function Footer() {
   const {isLoggedIn} = useUserStore();
   return (
     <div className="footer">
-      <div className='footer__title'>Website created by Lucas Mendonca</div>
       <div className='footer__links d-flex'>
         <div>
           <div className='footer__text'>Quick Links</div>
@@ -20,6 +19,8 @@ export default function Footer() {
           <Link to='#' className='link-disabled'><div className="footer__link">Cart</div></Link>
         </div>
       </div>
+      
+      <div className='footer__title'>Website created by Lucas Mendonca</div>
     </div>
   )
 }

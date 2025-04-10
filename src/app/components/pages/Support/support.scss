@@ -1,1 +1,19 @@
 @use 'assets/styles/variables.scss' as *;
+
+.support-page {
+  padding: 25px 5vw;
+  text-align: left;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 800px) {
+    display: block;
+  }
+
+  &__container {
+    width: 40vw;
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
+}

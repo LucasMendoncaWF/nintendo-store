@@ -2,14 +2,12 @@
 
 .footer{
   background-color: $white;
+  border-top: 5px solid $primary;
 
   &__title {
-    color: $white;
+    color: $primary;
     text-align: center;
     padding: 10px;
-    background-color: $primary;
-    border-bottom: 2px solid $primary;
-    border-top: 2px solid $primary;
   }
 
   &__links {

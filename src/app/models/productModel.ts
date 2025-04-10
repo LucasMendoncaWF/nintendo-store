@@ -3,5 +3,4 @@ export interface Product {
   bannerUrl: string;
   text: string;
   text2: string;
-  images: string[];
 }

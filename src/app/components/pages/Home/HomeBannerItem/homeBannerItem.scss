@@ -9,7 +9,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     width: 100%;
   }
 
@@ -31,9 +31,9 @@
     transition: 0.4s;
 
     &:hover {
-      top: 30%;
+      top: 25%;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 800px) {
         top: 10%;
       }
     }
@@ -63,6 +63,12 @@
     border-top: 10px solid $white;
     z-index: 10;
     position: relative;
+
+    h4 {
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
   }
 
   &__price {
@@ -74,7 +80,7 @@
     font-size: 24px;
     margin-top: -30px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 800px) {
       margin-top: -10px;
     }
   }

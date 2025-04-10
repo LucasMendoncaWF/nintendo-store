@@ -1,27 +1,37 @@
 @use './assets/styles/variables.scss' as *;
 
+$breakpoint: 1000px;
+
 .product-page {
 
+  .d-flex {
+    
+    @media screen and (max-width: $breakpoint) {
+      display: block;
+    }
+  }
+
   &__container {
-    align-items: center;
-    padding: 20px;
+    align-items: start;
     justify-self: center;
   }
 
   &__button {
-    width: 100%;
-    padding: 30px 50px;
-    font-size: 25px;
-    color: $white;
-    background-color: $primary;
+    padding: 10px 30px;
+    font-size: 20px;
+    color: $black;
+    text-decoration: underline;
+    background-color: $white;
     border: 2px solid $white;
-    border-radius: 20px;
-    transition: 0.3s;
+    border-radius: 50px;
+    transition: 0.1s;
     cursor: pointer;
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 50px;
 
     &:hover {
-      opacity: 0.8;
+      opacity: 0.7;
+      transform: scale(1.04);
     }
   }
   
@@ -34,29 +44,41 @@
   }
 
   &__text {
-    padding: 50px 30px;
     width: calc(60% - 60px);
+    padding: 25px;
     letter-spacing: 2px;
     color: $gray;
     white-space: pre-line;
 
+    @media screen and (max-width: $breakpoint) {
+      padding: 25px;
+      width: calc(100% - 50px);
+    }
+
     &--second {
       width: 100%;
       padding-top: 0;
+      padding-top: 25px;
+
+      @media screen and (max-width: $breakpoint) {
+        padding: 25px;
+        padding-top: 15px;
+        width: calc(100% - 50px);
+      }
     }
 
-
-    @media screen and (max-width: 800px) {
-      margin-top: 30px;
-      padding: 0 25px 60px;
-    }
   }
 
   &__banner {
-    width: calc(40% - 20px);
-    padding: 10px;
+    width: calc(40% - 25px);
+    padding: 25px;
     min-height: 12vh;
-    animation: loadBanner 1.5s infinite;
+    padding-right: 0;
+
+    @media screen and (max-width: $breakpoint) {
+      width: 100%;
+      padding: 0;
+    }
 
     img {
       width: 100%;

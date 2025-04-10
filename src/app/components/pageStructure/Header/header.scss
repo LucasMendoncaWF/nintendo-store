@@ -1,9 +1,13 @@
 @use 'assets/styles/variables.scss' as *;
 
 .header {
+  position: sticky;
+  top: 0;
+  left: 0;
   padding: 10px 25px;
   background-color: $white;
   align-items: center;
+  z-index: 99;
   .header-logo {
     margin-top: 4px;
     width: 120px;

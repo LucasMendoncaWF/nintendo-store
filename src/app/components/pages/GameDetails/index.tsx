@@ -20,7 +20,7 @@ export default function GameDetails () {
     data: game,
     isError,
     isFetching,
-  } = useFetchGame(Number(params.id))
+  } = useFetchGame(params.id || '')
 
   const {
     data: gamesList,

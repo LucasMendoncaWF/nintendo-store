@@ -83,7 +83,7 @@ export function useGetTotalPages({
   })
 }
 
-export function useFetchGame(id: number) {
+export function useFetchGame(id: string) {
   const query = {fields: '*, cover.url, artworks.url, genres.name, screenshots.url', ids: [id]};
   return useQuery<GameModel>({
     queryKey: [QueryKeys.singleGame, query.ids],

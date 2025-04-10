@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './footer.scss';
 import { useUserStore } from 'app/stores/userStore';
 export default function Footer() {
-  const {toggleLoginModal, isLoggedIn} = useUserStore();
+  const {isLoggedIn} = useUserStore();
   return (
     <div className="footer">
       <div className='footer__title'>Website created by Lucas Mendonca</div>

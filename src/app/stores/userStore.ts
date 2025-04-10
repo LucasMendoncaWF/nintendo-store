@@ -1,19 +1,33 @@
 import { create } from 'zustand';
 
+interface UserData {
+  userToken: string;
+  name: string;
+  email: string;
+  birthday_stamp: number,
+  country: string,
+}
+
 type UserStore = {
-  userToken: string | null;
+  userData: UserData | null;
   isLoginModalOpen: boolean;
-  login: (userToken: string) => void;
+  login: (userData: UserData) => void;
   logout: () => void;
   toggleLoginModal: (value: boolean) => void;
   isLoggedIn: boolean;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
-  userToken: null,
+  userData: null,
   isLoginModalOpen: false,
   isLoggedIn: false,
-  login: (userToken) => set({userToken, isLoggedIn: true}),
-  logout: () => set({userToken: null, isLoggedIn: false}),
+  login: (userData) => {
+    localStorage.setItem('userData', JSON.stringify(userData));
+    set({userData, isLoggedIn: true});
+  },
+  logout: () => {
+    localStorage.removeItem('userData');
+    set({userData: null, isLoggedIn: false});
+  },
   toggleLoginModal: (isLoginModalOpen) => set({isLoginModalOpen})
 }));

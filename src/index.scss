@@ -87,6 +87,10 @@ h1, h2, h3, h4 {
   }
 }
 
+.link-disabled div{
+  cursor: not-allowed !important;
+}
+
 @keyframes loadBanner {
   0%{
     background-color: $primary;
@@ -101,6 +105,12 @@ h1, h2, h3, h4 {
   }
 }
 
-.link-disabled div{
-  cursor: not-allowed !important;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
 }

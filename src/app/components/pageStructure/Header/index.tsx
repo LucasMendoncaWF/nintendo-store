@@ -7,10 +7,14 @@ import { useUserStore } from 'app/stores/userStore';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const {toggleLoginModal} = useUserStore();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const {toggleLoginModal, isLoggedIn, userData, logout} = useUserStore();
 
   return (
-    <header className="header d-flex space-between align-center">
+    <header className="header d-flex space-between align-center" onMouseLeave={() =>  {
+      setShowUserMenu(false);
+      setIsMobileMenuOpen(false);
+    }}>
       <div className="d-flex align-center">
         <Link to='/'><img className='header-logo' src={logo} alt="nintendo logo" /></Link>
         <div className='hide-mobile d-flex align-center header-links'>
@@ -19,14 +23,30 @@ export default function Header() {
         <Link to='/coins'><div className="header-link">Coins</div></Link>
         </div>
       </div>
-      <Link to='/' onClick={() => toggleLoginModal(true)} className='hide-mobile'>
-        <div className='sign-in d-flex align-center'>
-        <img className='sign-in-icon' src={userIcon} alt="user icon to sign in" />
-        <p>Sign In</p>
-        </div>
-      </Link>
+      {!isLoggedIn ? 
+        <Link to='#' onClick={() => toggleLoginModal(true)} className='hide-mobile'>
+          <div className='sign-in d-flex align-center'>
+          <img className='sign-in-icon' src={userIcon} alt="user icon to sign in" />
+          <p>Sign In</p>
+          </div>
+        </Link>
+      : 
+        <Link to='#' onClick={() => setShowUserMenu(true)} className='hide-mobile'>
+          <div className='sign-in d-flex align-center'>
+          <img className='sign-in-icon' src={userIcon} alt="user icon to sign in" />
+          <p>{userData?.name}</p>
+          </div>
+        </Link>
+      }
 
-      <div className='mobile-menu show-mobile' onMouseLeave={() => setIsMobileMenuOpen(false)}>
+      {showUserMenu && isLoggedIn && 
+        <div className='hide-mobile logged-menu' >
+          <Link to='/wishlist'><div className="logged-link">Wishlist</div></Link>
+          <Link to='/configuration'><div className="logged-link">Configuration</div></Link>
+          <Link to='#' onClick={() => logout()}><div className="logged-link">Sign Out</div></Link>
+        </div>
+      }
+      <div className='mobile-menu show-mobile'>
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={'mobile-menu-icon' + (isMobileMenuOpen ? ' active' : '')}>
           <div className='menu-line'></div>
           <div className='menu-line'></div>
@@ -37,7 +57,17 @@ export default function Header() {
             <Link to='/list'><div className="mobile-link">Store</div></Link>
             <Link to='#' className='link-disabled'><div className="mobile-link">Support</div></Link> 
             <Link to='/coins'><div className="mobile-link">Coins</div></Link>
-            <Link to='#' onClick={() => toggleLoginModal(true)}><div className="mobile-link">Sign In</div></Link>
+            {isLoggedIn && <Link to='/wishlist'><div className="mobile-link">Wishlist</div></Link>}
+            {isLoggedIn && <Link to='/configuration'><div className="mobile-link">Configuration</div></Link>}
+            {!isLoggedIn && 
+              <Link to='#' onClick={() => {
+                toggleLoginModal(true);
+                setIsMobileMenuOpen(false);
+              }}>
+                  <div className="mobile-link">Sign In</div>
+              </Link>
+            }
+            {isLoggedIn && <Link to='#' onClick={() => logout()}><div className="mobile-link">Sign Out</div></Link>}
           </div>
         }
       </div>

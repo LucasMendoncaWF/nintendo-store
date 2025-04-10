@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import './footer.scss';
+import { useUserStore } from 'app/stores/userStore';
 export default function Footer() {
+  const {toggleLoginModal, isLoggedIn} = useUserStore();
   return (
     <div className="footer">
       <div className='footer__title'>Website created by Lucas Mendonca</div>
@@ -14,7 +16,7 @@ export default function Footer() {
 
         <div>
           <div className='footer__text'>User</div>
-          <Link to='/wishlist'><div className="footer__link">Wishlist</div></Link>
+          {isLoggedIn && <Link to='/wishlist'><div className="footer__link">Wishlist</div></Link>}
           <Link to='#' className='link-disabled'><div className="footer__link">Cart</div></Link>
         </div>
       </div>

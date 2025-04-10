@@ -13,7 +13,7 @@ const mocks = {
   homeBanners: [
     {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
-      "image": "images/pokemonza.jpg",
+      "image": "images/pokemon.jpg",
       "title": "Know More!",
       "url": "/game/144054",
     },
@@ -50,7 +50,7 @@ exports.handler = async (event) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify({ error: 'Erro interno no servidor' }),
+      body: JSON.stringify({ error: 'An Error occurred while trying to fetch the banners' }),
     };
   }
 }

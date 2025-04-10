@@ -8,10 +8,14 @@ const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     const token = getToken()?.access_token;
-    config.headers["Client-ID"] = process.env.REACT_APP_CLIENT_ID;
     if (token) {
+    if(config.url?.includes('igdb')) {
+      config.headers["Client-ID"] = process.env.REACT_APP_CLIENT_ID;
       config.headers["Authorization"] = `Bearer ${token}`;
       config.headers['Content-Type']= 'text/plain';
+
+    }else
+      config.headers['Content-Type']= 'application/json';
     }
     return config;
   },

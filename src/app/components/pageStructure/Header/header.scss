@@ -32,6 +32,26 @@
     }
   }
 
+  .logged-menu {
+    z-index: 999;
+    position: absolute;
+    background-color: $white;
+    right: 0px;
+    top: 60px;
+
+    padding: 10px 0;
+    box-shadow: -10px 10px 5px 0px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.2s ease-in-out;
+
+    .logged-link {
+      font-size: 20px;
+      padding: 10px 30px;
+      font-weight: bold;
+      color: $primary;
+      text-align: right;
+    }
+  }
+
   .sign-in {
     cursor: pointer;
     font-size: 16px;
@@ -85,12 +105,11 @@
       }
     }
 
-    .mobile-links {
+    .mobile-links, .logged-menu {
       z-index: 999;
       position: absolute;
       background-color: $white;
       right: -25px;
-      width: 200px;
       top: 30px;
       padding: 10px 0;
       box-shadow: -10px 10px 5px 0px rgba(0, 0, 0, 0.08);
@@ -102,16 +121,6 @@
         font-weight: bold;
         color: $primary;
         text-align: right;
-      }
-
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-        }
-        
-        100% {
-          opacity: 1;
-        }
       }
     }
   }

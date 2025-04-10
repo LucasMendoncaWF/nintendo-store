@@ -4,4 +4,5 @@ export interface HomeBannerModel {
   title?: string;
   price?: number;
   buttonText?: string;
+  url: string;
 }

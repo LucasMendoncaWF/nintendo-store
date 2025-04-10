@@ -3,7 +3,7 @@ import heart from 'assets/images/heart.png';
 import heartFilled from 'assets/images/heart_filled.png';
 import noImage from 'assets/images/no-image.jpg';
 import './gameItem.scss';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 interface Props {
   game: GameModel;
@@ -20,6 +20,7 @@ export default function GameItem ({
   isOnCart,
   isOnWishList,
 }: Props) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [heartIcon, setHeartIcon] = useState(heart);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -29,7 +30,7 @@ export default function GameItem ({
 
 
   const releaseDate = new Date(game.first_release_date * 1000);
-  const imageUrl =  game.cover?.url ? game.cover.url.replace('t_thumb', 't_720p') : noImage;
+  const imageUrl =  game.artworks ? game.artworks[0]?.url?.replace('t_thumb', 't_720p') : noImage;
   const formattedDate = releaseDate.toLocaleDateString();
   return (
     <div className="game-item">
@@ -41,11 +42,13 @@ export default function GameItem ({
           <h3>{game.name}</h3>
           <p className="game-item__price">${game.price}</p>
           <div className="d-flex space-between">
-            <button 
-            onClick={(e) => {
-              onAddToCart(e, game.id)
-              setAddedToCart(!isOnCart);
-            }}
+            <button
+              ref={buttonRef}
+              onClick={(e) => {
+                onAddToCart(e, game.id);
+                buttonRef.current?.blur();
+                setAddedToCart(!isOnCart);
+              }}
               className={`game-item__add-cart ${isOnCart ? 'on-cart' : ''}`}
             >
               {!isOnCart ? 'Add to cart' : 'On cart'}

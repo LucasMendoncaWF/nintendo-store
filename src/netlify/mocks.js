@@ -2,11 +2,12 @@ const mocks = {
   secondaryBanners: [
     {
       "image": "images/party.jpg",
-      "buttonText": "Access"
+      "buttonText": "Access",
+      "url": "/game/306148"
     },
     {
       "image": "images/lite.jpg",
-      "buttonText": "Buy"
+      "buttonText": "Buy",
     }
   ],
   homeBanners: [
@@ -14,19 +15,18 @@ const mocks = {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
       "image": "images/pokemonza.jpg",
       "title": "Know More!",
-      "price": 80.00
+      "url": "/game/144054",
     },
     {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
       "image": "images/switch.jpeg",
       "title": "Get yours now!",
-      "price": 399.00
     },
     {
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec turpis vel leo posuere tincidunt. Aliquam erat volutpat. Aliquam eleifend volutpat mollis. Ut quis ornare dolor, a sagittis eros. Sed vulputate finibus sapien, et suscipit tortor aliquet ut.",
       "image": "images/peach.jpg",
       "title": "Know More!",
-      "price": 80.00
+      "url": "/game/254340",
     }
   ]
 }

@@ -1,67 +1,99 @@
 import { FiltersModel, GameModel } from "app/models/gameModel";
 import api from "./api";
+import { useQuery } from "@tanstack/react-query";
+import QueryKeys from "./queryKeys";
 
 export const maxPerPage = 28;
 
-export async function getRecentGamesList() {
-  const query = {fields: '*, cover.url, genres.name', filters : {platforms : 130}, sort: 'first_release_date desc', limit: 6};
-  return await api.post<GameModel[]>("igdb/games", 
-      query
-    ).then(response => {
-      return response.data;
-    }).catch((error) => {
-    return error;
-  });
+export function useGetRecentGamesList() {
+  const query = {fields: '*, artworks.url, genres.name', limit: 6};
+  return useQuery<GameModel[]>({
+    queryKey: [QueryKeys.gamesRecent],
+    queryFn: () => 
+      api.post("igdb/games", 
+        query
+      ).then(response => {
+        return response.data;
+      }).catch((error) => {
+        return error;
+      })
+  })
 }
 
 
-export async function getAllGames({
+export function useGetAllGames({
   page,
   searchTerm,
-  sort,
+}: FiltersModel) {
+  const pageSize = maxPerPage;
+  const query = {fields: '*, artworks.url, genres.name', name: searchTerm, limit: pageSize, offset: pageSize * (page - 1)};
+  return useQuery<GameModel[]>({
+    queryKey: [QueryKeys.allGames, page, searchTerm],
+    queryFn: () => 
+      api.post("igdb/games", 
+        query
+      ).then(response => {
+        return response.data;
+      }).catch((error) => {
+        return error;
+      })
+  })
+}
+
+export function useGetAllWishListGames({
+  page,
+  searchTerm,
   ids
 }: FiltersModel) {
   const pageSize = maxPerPage;
-  const currentSort = sort || 'desc';
-  const query = {fields: '*, cover.url, genres.name', ids, filters : {platforms : 130, name: searchTerm}, sort: 'first_release_date ' + currentSort, limit: pageSize, offset: pageSize * (page - 1)};
-  return await api.post<GameModel[]>("igdb/games", 
-      query
-    ).then(response => {
-      return response.data;
-    }).catch((error) => {
-    return error;
-  });
+  const query = {fields: '*, artworks.url, genres.name', ids, name: searchTerm, limit: pageSize, offset: pageSize * (page - 1)};
+  return useQuery<GameModel[]>({
+    queryKey: [QueryKeys.allGames, page, searchTerm, ids],
+    queryFn: () => 
+      api.post("igdb/games", 
+        query
+      ).then(response => {
+        return response.data;
+      }).catch((error) => {
+        return error;
+      }),
+      enabled: !!(ids && ids.length)
+  })
 }
 
-export async function getTotalPages({
+export function useGetTotalPages({
   page,
   searchTerm,
-  sort,
   ids,
 }: FiltersModel) {
   const pageSize = maxPerPage;
   const currentPage = page && page > 0 ? page : 1; 
-  const currentSort = sort || 'desc';
-  const query = {fields: '*, cover.url, genres.name', ids, filters : {platforms : 130, name: searchTerm}, sort: 'first_release_date ' + currentSort, limit: pageSize, offset: pageSize * (currentPage - 1)};
+  const query = {fields: 'name', ids, name: searchTerm, limit: pageSize, offset: pageSize * (currentPage - 1)};
   
-  return await api.post<GameModel[]>("igdb/games/count", 
-      query
-    ).then(response => {
-      return response.data;
-    }).catch((error) => {
-    return error;
-  });
+  return useQuery<number>({
+    queryKey: [QueryKeys.totalPages, page, searchTerm, ids],
+    queryFn: () => 
+      api.post("igdb/games/count", 
+        query
+      ).then(response => {
+        return response.data.count && (response.data.count / maxPerPage);
+      }).catch((error) => {
+        return error;
+    })
+  })
 }
 
-export async function fetchGame({
-  ids
-}: FiltersModel) {
-  const query = {fields: '*, cover.url, genres.name', ids};
-  return await api.post<GameModel[]>("igdb/games", 
-      query
-    ).then(response => {
-      return response.data;
-    }).catch((error) => {
-    return error;
-  });
+export function useFetchGame(id: number) {
+  const query = {fields: '*, cover.url, artworks.url, genres.name, screenshots.url', ids: [id]};
+  return useQuery<GameModel>({
+    queryKey: [QueryKeys.singleGame, query.ids],
+    queryFn: () => 
+      api.post("igdb/games", 
+        query
+      ).then(response => {
+        return response.data && response.data[0];
+      }).catch((error) => {
+        return error;
+    })
+  })
 }

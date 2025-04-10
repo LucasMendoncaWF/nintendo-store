@@ -8,7 +8,7 @@ interface Props {
 
 export default function SecondaryBannerItem ({banner}: Props) {
   return (
-    <Link to='/' className="secondary-banner" style={{backgroundImage: `url(${banner.image})`}}>
+    <Link to={banner.url} className="secondary-banner" style={{backgroundImage: `url(${banner.image})`}}>
       <div className="secondary-banner__button"></div>
       <div className="secondary-banner__text">{banner.buttonText}</div>
     </Link>

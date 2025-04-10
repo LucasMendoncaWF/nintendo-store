@@ -3,9 +3,11 @@ import userIcon from 'assets/images/user_icon.png';
 import './header.scss';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useUserStore } from 'app/stores/userStore';
 
-export default function Header({setIsLoginOpen}: {setIsLoginOpen: (value: boolean) => void}) {
+export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const {toggleLoginModal} = useUserStore();
 
   return (
     <header className="header d-flex space-between align-center">
@@ -17,7 +19,7 @@ export default function Header({setIsLoginOpen}: {setIsLoginOpen: (value: boolea
         <Link to='/coins'><div className="header-link">Coins</div></Link>
         </div>
       </div>
-      <Link to='/' onClick={() => setIsLoginOpen(true)} className='hide-mobile'>
+      <Link to='/' onClick={() => toggleLoginModal(true)} className='hide-mobile'>
         <div className='sign-in d-flex align-center'>
         <img className='sign-in-icon' src={userIcon} alt="user icon to sign in" />
         <p>Sign In</p>
@@ -35,7 +37,7 @@ export default function Header({setIsLoginOpen}: {setIsLoginOpen: (value: boolea
             <Link to='/list'><div className="mobile-link">Store</div></Link>
             <Link to='#' className='link-disabled'><div className="mobile-link">Support</div></Link> 
             <Link to='/coins'><div className="mobile-link">Coins</div></Link>
-            <Link to='#' onClick={() => setIsLoginOpen(true)}><div className="mobile-link">Sign In</div></Link>
+            <Link to='#' onClick={() => toggleLoginModal(true)}><div className="mobile-link">Sign In</div></Link>
           </div>
         }
       </div>

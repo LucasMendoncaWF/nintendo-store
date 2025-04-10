@@ -1,20 +1,18 @@
+import { useUserStore } from 'app/stores/userStore';
 import './loginForm.scss';
 
-interface Props {
-  setIsLoginOpen: (value: boolean) => void;
-  isLoginOpen: boolean;
-}
+export default function LoginForm() {
 
-export default function LoginForm({isLoginOpen, setIsLoginOpen}: Props) {
+  const {toggleLoginModal, isLoginModalOpen} = useUserStore();
 
-  if(!isLoginOpen) {
+  if(!isLoginModalOpen) {
     return null;
   }
 
   return (
-    <div className="login__background" onClick={() => setIsLoginOpen(false)}>
+    <div className="login__background" onClick={() => toggleLoginModal(false)}>
       <form className="login__modal" onClick={(e) => e.stopPropagation()}>
-        <button className='login__modal__close' onClick={() => setIsLoginOpen(false)}>x</button>
+        <button className='login__modal__close' onClick={() => toggleLoginModal(false)}>x</button>
         <div className='login__modal__title'>Sign In</div>
         <div>
           <label>E-mail</label>

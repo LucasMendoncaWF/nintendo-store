@@ -33,13 +33,13 @@ exports.handler = async (event) => {
   const requestBody = event.body ? JSON.parse(event.body) : {};
 
   let newBody = '';
-  if(requestBody.filters?.name) {
-    newBody+= `search "${requestBody.filters?.name}"; `
+  if(requestBody.name) {
+    newBody+= `search "${requestBody.name}"; `
   }
   newBody +=`fields ${requestBody.fields}; `;
   newBody+= `where platforms = 130 & first_release_date < ${(new Date().getTime() / 1000).toFixed()}${requestBody.ids? ` & id=(${requestBody.ids.join(', ')})` : ''}; `
-  if(!requestBody.filters?.name && requestBody.sort){
-    newBody+= `sort ${requestBody.sort}; `; 
+  if(!requestBody.name){
+    newBody+= `sort first_release_date desc; `; 
   }
   if(requestBody.limit) {
     newBody += `limit ${requestBody.limit}; `;

@@ -9,7 +9,7 @@ interface Props {
 export default function HomeBannerItem ({banner}: Props) {
   return (
     <div className="home-banner" style={{backgroundImage: `url(${banner.image})`}}>
-      <Link to='/'>
+      <Link to={banner.url}>
         <div className="home-banner__text">
           <div className="home-banner__title">{banner.title}</div>
           <div className="home-banner__description">

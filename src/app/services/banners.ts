@@ -1,17 +1,29 @@
 
 import { HomeBannerModel } from "app/models/HomeBannerModel";
 import api from "./api";
+import { useQuery } from "@tanstack/react-query";
+import QueryKeys from "./queryKeys";
 
-export async function getHomeBanners() {
-  return await api.get<HomeBannerModel[]>("mocks/homeBanners", {
-  }).catch((error) => {
-    return error.response.data; 
-  });
+export function useGetHomeBanners() {
+  return useQuery<HomeBannerModel[]>({
+    queryKey: [QueryKeys.primaryBanner],
+    queryFn: () => 
+      api.get("mocks/homeBanners").catch((error) => {
+        return error.response.data; 
+      }).then((response) => {
+        return response.data as HomeBannerModel[];
+    })
+  })
 }
 
-export async function getSecondaryBanners() {
-  return await api.get<HomeBannerModel[]>("mocks/secondaryBanners", {
-  }).catch((error) => {
-    return error.response.data; 
-  });
+export function useGetSecondaryBanners() {
+  return useQuery<HomeBannerModel[]>({
+    queryKey: [QueryKeys.secondaryBanner],
+    queryFn: () => 
+      api.get("mocks/secondaryBanners").catch((error) => {
+        return error.response.data; 
+      }).then((response) => {
+        return response.data;
+    })
+  })
 }

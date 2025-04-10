@@ -3,8 +3,10 @@ import CoinsContainer from 'assets/images/coin-container.png';
 import CoinsContainerBack from 'assets/images/coin-container-back.png';
 import './coins.scss';
 import { useRef, useState } from 'react';
+import { useUserStore } from 'app/stores/userStore';
 
 export default function Coins () {
+  const {isLoggedIn, toggleLoginModal} = useUserStore();
   const [appearCoin, setAppearCoin] = useState(false);
   const sessionAmount = sessionStorage.getItem('coins');
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -44,9 +46,15 @@ export default function Coins () {
           <img className={`image-front ${appearCoin && 'appear'}`} onLoad={() => setImageLoaded(true)} alt="coin container" src={CoinsContainer} />
         </div>
         <div>
+          {isLoggedIn ?
           <button onClick={() => !isCollecting.current && onGetCoin()} disabled={amount >= maxCoin || isCollecting.current} className='coin-page__collector-area__button'>
             {amount < maxCoin ? 'Collect your coins!' : 'Come back tomorrow!'}
           </button>
+          :
+          <button onClick={() => toggleLoginModal(true)} className='coin-page__collector-area__button'>
+            Log in to get your coins!
+          </button>
+          }
         </div>
       </div>
       <div className='coin-page__text'>

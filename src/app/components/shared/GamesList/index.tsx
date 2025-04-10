@@ -1,4 +1,4 @@
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import Loader from "../Loader";
 import GameItem from "./GameItem";
 import './gamesList.scss';
@@ -25,6 +25,10 @@ export default function GamesList ({
   const sessionCart = sessionStorage.getItem('cart');
   const parsedCart = sessionCart? JSON.parse(sessionCart) : [];
   const [inCart, setInCart] = useState<number[]>(parsedCart);
+
+  useEffect(() => {
+    window.scrollTo({behavior: 'smooth', top: 0})
+  }, [games])
   
   const onAddToWishlist = (e: React.MouseEvent, gameId: number) => {
     e.stopPropagation();

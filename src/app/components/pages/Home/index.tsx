@@ -1,57 +1,32 @@
-import { getHomeBanners, getSecondaryBanners } from 'app/services/banners';
+import { useGetHomeBanners, useGetSecondaryBanners } from 'app/services/banners';
 import HomeBannerItem from './HomeBannerItem';
 import SecondaryBannerItem from './SecondaryBannerItem';
-import { useCallback, useEffect, useState } from 'react'
-import { HomeBannerModel } from 'app/models/HomeBannerModel';
 import GamesList from 'app/components/shared/GamesList';
 import Loader from 'app/components/shared/Loader';
-import { getRecentGamesList } from 'app/services/gamesSearch';
-import { GameModel } from 'app/models/gameModel';
+import { useGetRecentGamesList } from 'app/services/gamesSearch';
 
 export default function Home () {
-  const [banners, setBanners] = useState<HomeBannerModel[]>([]);
-  const [secondaryBanners, setSecondaryBanners] = useState<HomeBannerModel[]>([]);
-  const [games, setGames] = useState<GameModel[]>([]);
-  const [hasError, setError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getGames = useCallback(async () => {
-    const gamesResponse = await getRecentGamesList();
-    setIsLoading(false);
-    if(gamesResponse.status) {
-      setGames([]);
-      setError(true);
-      return;
-    }
+  const {
+    data: games,
+    isError,
+    isLoading,
+  } = useGetRecentGamesList();
 
-    if(gamesResponse) {
-      setGames(gamesResponse);
-      setError(false);
-    }
-  }, []);
+  const {
+    data: banners,
+    isLoading: isLoadingPrimaryBanner,
+  } = useGetHomeBanners();
 
-  const geBanners = useCallback(async () => {
-    const bannersResponse = await getHomeBanners();
-    if(bannersResponse) {
-      setBanners(bannersResponse.data);
-    }
-
-    const secondaryBannersResponse = await getSecondaryBanners();
-    if(secondaryBannersResponse) {
-      setSecondaryBanners(secondaryBannersResponse.data);
-    }
-    setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    getGames();
-    geBanners();
-  }, [getGames, geBanners])
+  const {
+    data: secondaryBanners,
+    isLoading: isLoadingSecondaryBanner,
+  } = useGetSecondaryBanners();
 
   return (
     <div className="home">
       {
-        isLoading && <div className='d-flex justify-content-center'><Loader /></div>
+        (isLoadingSecondaryBanner || isLoadingPrimaryBanner) && <div className='d-flex justify-content-center'><Loader /></div>
       }
       <div className='d-flex wrap'>
         {banners?.map((banner, index) => (
@@ -66,8 +41,8 @@ export default function Home () {
       <div className='margin-top'>
         <GamesList
           games={games}
-          hasError={hasError}
-          isEmptyResponse={!hasError && !isLoading && !games.length}
+          hasError={isError}
+          isEmptyResponse={!isError && !isLoading && !games?.length}
           isLoading={isLoading}
           title='New Games'
         />

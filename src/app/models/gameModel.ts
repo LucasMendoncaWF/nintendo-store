@@ -3,6 +3,14 @@ export interface GameModel {
     id: number;
     url: string;
   };
+  screenshots: {
+    id: number;
+    url: string;
+  }[];
+  artworks: {
+    id: number;
+    url: string;
+  }[];
   summary: string;
   name: string;
   id: number;
@@ -19,7 +27,7 @@ export interface GameGenreModel {
 export interface FiltersModel {
   page: number;
   searchTerm?: string;
-  sort?: 'desc' | 'asc';
   totalPages?: number;
   ids?: number[];
+  id?: number;
 }

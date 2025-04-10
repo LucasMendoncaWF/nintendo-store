@@ -4,33 +4,34 @@
   &__banner {
     position: relative;
     width: 100%;
-    height: 90vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: $primary;
-    animation: loadBanner 1.5s infinite;
+  }
 
-    @media screen and (max-width: 850px) {
-      margin-bottom: 380px;
-      height: 300px;
-    }
+  &__image {
+    width: 100%;
+    margin-bottom: -4px;
+    max-height: calc(100vh - 100px);
   }
 
   &__info {
     position: absolute;
     bottom: 0;
     background-color: $white;
-    padding: 50px;
+    padding: 35px;
     border-top-right-radius: 50px;
-    width: 45%;
-    box-shadow: 6px -6px 8px #00000057;
+    width: 500px;
+    box-shadow: 6px -6px 5px 2px rgba(0, 0, 0, 0.4);
     @media screen and (max-width: 850px) {
       position: relative;
-      width: calc(90% - 100px);
-      bottom: unset;
-      top: calc(100% - 80px);
+      padding: 25px 35px;
+      width: calc(100% - 70px - 15px);
       border-bottom-right-radius: 50px;
+      overflow: hidden;
+      bottom: unset;
+      margin-top: -40px;
+      margin-bottom: 30px;
     }
   }
 
@@ -53,16 +54,28 @@
 
   &__summary {
     color: $gray;
-    line-clamp: 3;
+    text-align: justify;
+    line-clamp: 6;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;  
     overflow: hidden;
   }
 
   &__tags {
-    margin-top: 10px;
     gap: 2px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+  }
+
+  &__date {
+    font-size: 14px;
+    color: $gray;
+    margin-bottom: 15px;
+  }
+
+  &__name {
+    margin: 0;
   }
 
   &__add-wishlist {

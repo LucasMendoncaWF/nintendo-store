@@ -2,9 +2,12 @@
 
 .game-item {
   position: relative;
-  height: 380px;
+  height: 320px;
   width: calc((100% / 7) - 19px);
   margin-bottom: 30px;
+  @media screen and (max-width: 1500px) {
+    height: 370px;
+  }
 
   $border: 3px;
   $borderX: calc($border * 2);
@@ -50,8 +53,9 @@
   }
 
   @media screen and (max-width: 768px) {
-    min-width: calc(80% - 30px - $borderX);
+    min-width: calc(95% - 30px - $borderX);
     margin-left: -5px;
+    height: 415px;
   }
 
 
@@ -72,12 +76,22 @@
 
   &__image {
     width: 100%;
-    height: 220px;
+    height: 160px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     margin-top: -10px;
     padding-top: 0;
+
+    @media screen and (max-width: 1500px) {
+      height: 200px;
+    }
+
+    
+    @media screen and (max-width: 768px) {
+
+      height: 240px;
+    }
   }
 
   &__info {
@@ -137,15 +151,17 @@
     }
   }
 
+  $boxBorderColor: #a37035;
+
   &__box {
     position: absolute;
-    background-color: $secondary;
+    background-color: #7c4200;
     width: 50%;
     left: 25%;
     height: 100px;
     z-index: 99;
     top: calc(100% + 10px);
-    border: 6px solid $secondary-darker;
+    border: 6px solid $boxBorderColor;
     border-top: 0;
     transform: scale(0) rotate(0deg);
     opacity: 0;
@@ -172,7 +188,7 @@
     width: calc(50% + 6px);
     top: -4px;
     left: -6px;
-    background-color: $secondary-darker;
+    background-color: $boxBorderColor;
     transform-origin: 0 0;
     transform: rotate(-180deg) translate(-6px, -6px);
     box-shadow: -2px 4px 7px 2px rgba(145, 145, 145, 0.1);
@@ -185,7 +201,7 @@
     width: calc(50% + 6px);
     top: -4px;
     right: -6px;
-    background-color: $secondary-darker;
+    background-color: $boxBorderColor;
     transform-origin: 100% 0;
     transform: rotate(-180deg) translate(6px, -6px);
     box-shadow: -2px 4px 7px 2px rgba(145, 145, 145, 0.1);
@@ -194,11 +210,11 @@
 
   &__line-middle {
     position: absolute;
-    width: 8px;
-    background-color: $secondary-darker;
+    width: 12px;
+    background-color: $boxBorderColor;
     opacity: 0.5;
     height: 100%;
-    left: calc(50% - 4px);
+    left: calc(50% - 6px);
   }
 
   @keyframes moveToBox {
@@ -209,7 +225,7 @@
       transform: scale(0.2);
     }
     35% {
-      transform: scale(0.2) translateY(1250px);
+      transform: scale(0.2) translateY(1150px);
       opacity: 1;
     }
 
@@ -218,11 +234,11 @@
     }
 
     70% {
-      transform: scale(0.2) translateY(1250px);
+      transform: scale(0.2) translateY(1150px);
     }
     72% {
       opacity:0;
-      transform: scale(0.2) translateY(1250px);
+      transform: scale(0.2) translateY(1150px);
     }
 
     74% {

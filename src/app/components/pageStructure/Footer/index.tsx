@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <div className='footer__text'>Quick Links</div>
           <Link to='/list'><div className="footer__link">Store</div></Link>
-          <Link to='#' className='link-disabled'><div className="footer__link">Support</div></Link>
+          <Link to='/support'><div className="footer__link">Support</div></Link>
           <Link to='/coins'><div className="footer__link">Coins</div></Link>
         </div>
 

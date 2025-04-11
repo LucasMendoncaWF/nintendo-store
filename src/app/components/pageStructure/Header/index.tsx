@@ -23,7 +23,7 @@ export default function Header() {
         <Link to='/'><img className='header-logo' src={logo} alt="nintendo logo" /></Link>
         <div className='hide-mobile d-flex align-center header-links'>
         <Link to='/list'><div className="header-link">Store</div></Link>
-        <Link to='#' className='link-disabled'><div className="header-link">Support</div></Link>
+        <Link to='/support'><div className="header-link">Support</div></Link>
         <Link to='/coins'><div className="header-link">Coins</div></Link>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function Header() {
         {isMobileMenuOpen && 
           <div className='mobile-links'>
             <Link onClick={onClickLink} to='/list'><div className="mobile-link">Store</div></Link>
-            <Link onClick={onClickLink} to='#' className='link-disabled'><div className="mobile-link">Support</div></Link> 
+            <Link onClick={onClickLink} to='/support'><div className="mobile-link">Support</div></Link> 
             <Link onClick={onClickLink} to='/coins'><div className="mobile-link">Coins</div></Link>
             {isLoggedIn && <Link onClick={onClickLink} to='/wishlist'><div className="mobile-link">Wishlist</div></Link>}
             {isLoggedIn && <Link onClick={onClickLink} to='/configuration'><div className="mobile-link">Configuration</div></Link>}

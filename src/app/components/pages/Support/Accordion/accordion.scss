@@ -1,0 +1,61 @@
+@use 'assets/styles/variables.scss' as *;
+
+.accordion {
+  border-bottom: 1px solid rgba($gray, 0.5);
+  margin: 5px 0;
+
+  &__title {
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: $gray;
+    padding: 5px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__content {
+    padding: 5px;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.2s;
+    color: $gray;
+
+    &.open {
+      max-height: 200px;
+      padding-bottom: 20px;
+    }
+  }
+
+  button {
+    border: 0;
+    background-color: transparent;
+  }
+
+  &__arrow {
+    border: solid $gray;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    width: 4px;
+    height: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &.up {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+
+    &.down {
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+}

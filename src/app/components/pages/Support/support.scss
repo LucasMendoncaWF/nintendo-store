@@ -1,12 +1,13 @@
 @use 'assets/styles/variables.scss' as *;
 
 .support-page {
-  padding: 25px 5vw;
+  padding: 80px 5vw;
   text-align: left;
   flex-wrap: wrap;
 
   @media screen and (max-width: 800px) {
     display: block;
+    padding: 25px 30px;
   }
 
   &__container {
@@ -14,6 +15,24 @@
 
     @media screen and (max-width: 800px) {
       width: 100%;
+      margin-bottom: 40px;
     }
+  }
+
+  &__title {
+    color: $gray;
+    letter-spacing: 2px;
+    border-bottom: 2px solid $gray;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 25px;
+
+    @media screen and (max-width: 800px) {
+      font-size: 22px;
+    }
+  }
+
+  &__content {
+    margin-top: 30px;
   }
 }

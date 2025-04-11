@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import {useEffect } from "react";
 import Loader from "../Loader";
 import GameItem from "./GameItem";
 import './gamesList.scss';

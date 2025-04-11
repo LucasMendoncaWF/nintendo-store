@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import './wishlist.scss';
 import GamesList from 'app/components/shared/GamesList';
 import Pagination from 'app/components/shared/GamesList/Pagination';

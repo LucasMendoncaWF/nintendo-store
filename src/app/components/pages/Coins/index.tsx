@@ -1,4 +1,5 @@
 import CoinsBanner from 'assets/images/coins-banner.jpg';
+import CoinsBannerMobile from 'assets/images/coins-banner-mobile.jpg';
 import CoinsContainer from 'assets/images/coin-container.png';
 import CoinsContainerBack from 'assets/images/coin-container-back.png';
 import './coins.scss';
@@ -35,7 +36,8 @@ export default function Coins () {
     <div className='coin-page'>
       <h3 className='coin-page__title'>Your Coins</h3>
       <div className='coin-page__banner'>
-        <img alt="mario coins banner" src={CoinsBanner} />
+        <img className='hide-mobile' alt="mario coins banner" src={CoinsBanner} />
+        <img className='show-mobile' alt="mario coins banner" src={CoinsBannerMobile} />
       </div>
       <div className='coin-page__collector-area'>
         <div className='coin-page__collector-area__container'>

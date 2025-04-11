@@ -26,7 +26,7 @@ export default function Product () {
             {product?.text2}
         </div>
       </div>
-      <div className='product-page__container d-flex'>
+      <div className='product-page__container d-flex justify-content-center'>
         <button className='product-page__button'>Get yours now!</button>
       </div>
     </div>

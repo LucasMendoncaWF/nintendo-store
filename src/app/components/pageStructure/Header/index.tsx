@@ -10,6 +10,10 @@ export default function Header() {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const {toggleLoginModal, isLoggedIn, userData, logout} = useUserStore();
 
+  const onClickLink = () => {
+    setIsMobileMenuOpen(false);
+  }
+
   return (
     <header className="header d-flex space-between align-center" onMouseLeave={() =>  {
       setShowUserMenu(false);
@@ -54,11 +58,11 @@ export default function Header() {
         </button>
         {isMobileMenuOpen && 
           <div className='mobile-links'>
-            <Link to='/list'><div className="mobile-link">Store</div></Link>
-            <Link to='#' className='link-disabled'><div className="mobile-link">Support</div></Link> 
-            <Link to='/coins'><div className="mobile-link">Coins</div></Link>
-            {isLoggedIn && <Link to='/wishlist'><div className="mobile-link">Wishlist</div></Link>}
-            {isLoggedIn && <Link to='/configuration'><div className="mobile-link">Configuration</div></Link>}
+            <Link onClick={onClickLink} to='/list'><div className="mobile-link">Store</div></Link>
+            <Link onClick={onClickLink} to='#' className='link-disabled'><div className="mobile-link">Support</div></Link> 
+            <Link onClick={onClickLink} to='/coins'><div className="mobile-link">Coins</div></Link>
+            {isLoggedIn && <Link onClick={onClickLink} to='/wishlist'><div className="mobile-link">Wishlist</div></Link>}
+            {isLoggedIn && <Link onClick={onClickLink} to='/configuration'><div className="mobile-link">Configuration</div></Link>}
             {!isLoggedIn && 
               <Link to='#' onClick={() => {
                 toggleLoginModal(true);
@@ -67,7 +71,7 @@ export default function Header() {
                   <div className="mobile-link">Sign In</div>
               </Link>
             }
-            {isLoggedIn && <Link to='#' onClick={() => logout()}><div className="mobile-link">Sign Out</div></Link>}
+            {isLoggedIn && <Link to='#' onClick={() => {logout(); onClickLink();}}><div className="mobile-link">Sign Out</div></Link>}
           </div>
         }
       </div>

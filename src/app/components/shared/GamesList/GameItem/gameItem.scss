@@ -156,8 +156,8 @@
   &__box {
     position: absolute;
     background-color: #7c4200;
-    width: 50%;
-    left: 25%;
+    width: 100px;
+    left: calc(50% - 50px - 3px);
     height: 100px;
     z-index: 99;
     top: calc(100% + 10px);

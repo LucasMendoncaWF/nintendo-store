@@ -48,7 +48,7 @@
     min-width: calc((100% / 4) - 30px - $borderX);
   }
 
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 800px) {
     min-width: calc((100% / 3) - 30px - $borderX);
   }
 

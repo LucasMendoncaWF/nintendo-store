@@ -10,6 +10,7 @@ interface Props {
   isLoading: boolean;
   hasError: boolean;
   isEmptyResponse: boolean;
+  hasAutoScroll?: boolean
 }
 
 export default function GamesList ({
@@ -18,45 +19,13 @@ export default function GamesList ({
   isLoading,
   hasError,
   isEmptyResponse,
+  hasAutoScroll
 }: Props) {
-  const sessionWishList = sessionStorage.getItem('wishlist');
-  const parsedWishList = sessionWishList? JSON.parse(sessionWishList) : [];
-  const [inWishlist, setInWishlist] = useState<number[]>(parsedWishList);
-  const sessionCart = sessionStorage.getItem('cart');
-  const parsedCart = sessionCart? JSON.parse(sessionCart) : [];
-  const [inCart, setInCart] = useState<number[]>(parsedCart);
-
   useEffect(() => {
-    window.scrollTo({behavior: 'smooth', top: 0})
-  }, [games])
-  
-  const onAddToWishlist = (e: React.MouseEvent, gameId: number) => {
-    e.stopPropagation();
-    e.preventDefault();
-    let newWishlist = [];
-    if(inWishlist.includes(gameId)) {
-      newWishlist = inWishlist.filter((id: number) => id !== gameId);
-      sessionStorage.setItem('wishlist', JSON.stringify(newWishlist));
-    } else {
-      newWishlist = [...inWishlist, gameId];
-      sessionStorage.setItem('wishlist', JSON.stringify(newWishlist));
+    if(hasAutoScroll) {
+      window.scrollTo({behavior: 'smooth', top: 0});
     }
-    setInWishlist(newWishlist);
-  }
-
-  const onAddToCart = (e: React.MouseEvent, gameId: number) => {
-    e.stopPropagation();
-    e.preventDefault();
-    let newCart = [];
-    if(inCart.includes(gameId)) {
-      newCart = inCart.filter((id: number) => id !== gameId);
-      sessionStorage.setItem('cart', JSON.stringify(newCart));
-    } else {
-      newCart = [...inCart, gameId];
-      sessionStorage.setItem('cart', JSON.stringify(newCart));
-    }
-    setInCart(newCart);
-  }
+  }, [games, hasAutoScroll]);
   
   return (
     <div>
@@ -69,10 +38,6 @@ export default function GamesList ({
         
         {!isLoading && games?.map((game, index) => (
           <GameItem 
-            onAddToCart={onAddToCart} 
-            onAddToWishList={onAddToWishlist} 
-            isOnWishList={inWishlist.includes(game.id)} 
-            isOnCart={inCart.includes(game.id)} 
             game={game} 
             key={`${index}_${game.id} `}
           />

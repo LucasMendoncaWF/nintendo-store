@@ -5,30 +5,38 @@ import noImage from 'assets/images/no-image.jpg';
 import './gameItem.scss';
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useCartStore } from 'app/stores/cartStore';
+import { useWishlistStore } from 'app/stores/wishlistStore';
 interface Props {
   game: GameModel;
-  onAddToCart: (e: React.MouseEvent, gameId: number) => void;
-  onAddToWishList: (e: React.MouseEvent, gameId: number) => void;
-  isOnWishList: boolean;
-  isOnCart: boolean;
 }
 
 export default function GameItem ({
   game,
-  onAddToCart,
-  onAddToWishList,
-  isOnCart,
-  isOnWishList,
 }: Props) {
+  const {onClickCart, cartItems} = useCartStore();
+  const {onClickWishlist, wishlistItems} = useWishlistStore();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [heartIcon, setHeartIcon] = useState(heart);
   const [addedToCart, setAddedToCart] = useState(false);
 
   useEffect(() => {
-    setHeartIcon(isOnWishList ? heartFilled : heart);
-  }, [isOnWishList]);
+    setHeartIcon(wishlistItems.includes(game.id) ? heartFilled : heart);
+  }, [wishlistItems, game.id]);
 
+  const onAddToCart = (e: React.MouseEvent, gameId: number) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onClickCart(gameId);
+  }
 
+  const onAddToWishList = (e: React.MouseEvent, gameId: number) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onClickWishlist(gameId);
+  }
+
+  const isOnCart = cartItems.includes(game.id);
   const releaseDate = new Date(game.first_release_date * 1000);
   const imageUrl =  game.artworks ? game.artworks[0]?.url?.replace('t_thumb', 't_720p') : noImage;
   const formattedDate = releaseDate.toLocaleDateString();

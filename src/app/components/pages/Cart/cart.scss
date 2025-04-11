@@ -1,0 +1,75 @@
+@use './assets/styles/variables.scss' as *;
+
+.cart-page {
+  &__title {
+    color: $white;
+    background-color: $primary;
+    padding: 20px;
+    font-size: 25px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: $gray;
+    padding: 20px 40px;
+  }
+
+  &__content {
+    min-height: calc(100vh - 200px);
+    width: 100%;
+    max-width: 800px;
+    background-color: $white;
+    position: relative;
+    padding-bottom: 54px;
+    box-shadow: 1px 1px 4px 3px rgba($black, 0.08);
+  }
+
+  &__pagination {
+    transform: scale(0.8);
+    margin-bottom: -30px;
+  }
+
+  &__games-list {
+    border-bottom: 4px solid $primary;
+  }
+
+  &__total, &__pay-button {
+    padding: 20px 40px;
+    font-size: 20px;
+    font-weight: bold;
+
+    @media screen and (max-width: 800px) {
+      padding: 20px;
+    }
+  }
+
+  &__pay-button {
+    justify-content: end;
+    background-color: $primary;
+    color: $white;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 40px);
+
+    button {
+      background-color: $white;
+      color: $black;
+      border: 0;
+      padding: 10px 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 12px;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

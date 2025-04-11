@@ -16,7 +16,7 @@ export default function Footer() {
         <div>
           <div className='footer__text'>User</div>
           {isLoggedIn && <Link to='/wishlist'><div className="footer__link">Wishlist</div></Link>}
-          <Link to='#' className='link-disabled'><div className="footer__link">Cart</div></Link>
+          <Link to='/cart'><div className="footer__link">Cart</div></Link>
         </div>
       </div>
       

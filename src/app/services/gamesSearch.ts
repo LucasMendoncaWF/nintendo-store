@@ -40,15 +40,14 @@ export function useGetAllGames({
   })
 }
 
-export function useGetAllWishListGames({
+export function useGetGamesById({
   page,
-  searchTerm,
   ids
 }: FiltersModel) {
   const pageSize = maxPerPage;
-  const query = {fields: '*, artworks.url, genres.name', ids, name: searchTerm, limit: pageSize, offset: pageSize * (page - 1)};
+  const query = {fields: '*, artworks.url, genres.name', ids, limit: pageSize, offset: pageSize * (page - 1)};
   return useQuery<GameModel[]>({
-    queryKey: [QueryKeys.allGames, page, searchTerm, ids],
+    queryKey: [QueryKeys.allGames, page, ids],
     queryFn: () => 
       api.post("igdb/games", 
         query

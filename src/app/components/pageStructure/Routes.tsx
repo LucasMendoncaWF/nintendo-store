@@ -1,3 +1,4 @@
+import CartPage from "../pages/Cart";
 import Coins from "../pages/Coins";
 import GameDetails from "../pages/GameDetails";
 import Home from "../pages/Home";
@@ -18,6 +19,7 @@ export default function RoutesComponent () {
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/game/:id" element={<GameDetails />} />
       <Route path="/product/:id" element={<Product />} />
+      <Route path="/cart" element={<CartPage />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   )

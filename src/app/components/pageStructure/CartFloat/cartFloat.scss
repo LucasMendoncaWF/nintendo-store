@@ -1,0 +1,45 @@
+@use 'assets/styles/variables.scss' as *;
+
+.cart-float {
+  position: fixed;
+  top: 80px;
+  right: -2px;
+  z-index: 9;
+  background-color: $white;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  width: 70px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border: 2px solid $primary;
+  transition: 0.4s;
+
+  &:hover {
+    width: 100px;
+  }
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+  }
+
+  &__count {
+    position: absolute;
+    color: $white;
+    background-color: $primary;
+    font-weight: bold;
+    padding: 4px;
+    width: 8px;
+    height: 8px;
+    font-size: 10px;
+    line-height: 8px;
+    border-radius: 50%;
+    text-align: center;
+    left: 45px;
+    bottom: 5px;
+  }
+
+}

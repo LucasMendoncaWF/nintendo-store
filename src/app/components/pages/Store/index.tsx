@@ -35,6 +35,7 @@ export default function Store () {
       isEmptyResponse={!isError && !games?.length && !isLoading}
       isLoading={isLoading}
       title='All Games'
+      hasAutoScroll
     />
     
     {setCurrentPage && showPagination && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={(page) => setCurrentPage(page)}/>}

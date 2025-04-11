@@ -8,19 +8,21 @@ import './gameDetails.scss'
 import GameTag from "app/components/shared/GameTag";
 import Loader from "app/components/shared/Loader";
 import ErrorMessage from "app/components/shared/ErrorMessage";
+import { useCartStore } from "app/stores/cartStore";
+import { useWishlistStore } from "app/stores/wishlistStore";
+import noImage from 'assets/images/no-image.jpg';
 
 export default function GameDetails () {
   const params = useParams();
-
-  const [inWishlist, setInWishlist] = useState<number[]>([]);
-  const [inCart, setInCart] = useState<number[]>([]);
+  const {onClickCart, cartItems} = useCartStore();
+  const {onClickWishlist, wishlistItems} = useWishlistStore();
   const [heartIcon, setHeartIcon] = useState(heart);
 
   const {
     data: game,
     isError,
     isFetching,
-  } = useFetchGame(params.id || '')
+  } = useFetchGame(params.id || '');
 
   const {
     data: gamesList,
@@ -31,54 +33,26 @@ export default function GameDetails () {
   const onAddToWishlist = (e: React.MouseEvent, gameId: number) => {
     e.stopPropagation();
     e.preventDefault();
-    if(!game?.id) {
-      return;
-    }
-    let newWishlist = [];
-    if(inWishlist.includes(gameId)) {
-      newWishlist = inWishlist.filter((id: number) => id !== gameId);
-      sessionStorage.setItem('wishlist', JSON.stringify(newWishlist));
-    } else {
-      newWishlist = [...inWishlist, gameId];
-      sessionStorage.setItem('wishlist', JSON.stringify(newWishlist));
-    }
-    setInWishlist(newWishlist);
-    setHeartIcon(newWishlist.includes(game.id) ? heartFilled : heart);
+    onClickWishlist(gameId);
   }
 
   const onAddToCart = (e: React.MouseEvent, gameId: number) => {
     e.stopPropagation();
     e.preventDefault();
-    if(!game?.id) {
-      return;
-    }
-    let newCart = [];
-    if(inCart.includes(gameId)) {
-      newCart = inCart.filter((id: number) => id !== gameId);
-      sessionStorage.setItem('cart', JSON.stringify(newCart));
-    } else {
-      newCart = [...inCart, gameId];
-      sessionStorage.setItem('cart', JSON.stringify(newCart));
-    }
-    setInCart(newCart);
+    onClickCart(gameId);
   }
 
   useEffect(() => {
-    const sessionWishList = sessionStorage.getItem('wishlist');
-    const parsedWishList = sessionWishList? JSON.parse(sessionWishList) : [];
-    setInWishlist(parsedWishList);
-    setHeartIcon(parsedWishList.includes(game?.id) ? heartFilled : heart);
+    window.scrollTo({behavior: 'smooth', top: 0});
+  }, [game?.id])
 
-    const sessionCart = sessionStorage.getItem('cart');
-    const parsedCart = sessionCart? JSON.parse(sessionCart) : [];
-    setInCart(parsedCart);
-
-    window.scrollTo({behavior: 'smooth', top: 0})
-  }, [ game?.id]);
+  useEffect(() => {
+    setHeartIcon(game?.id && wishlistItems.includes(game?.id) ? heartFilled : heart);
+  }, [wishlistItems, game?.id]);
 
   const releaseDate = game && new Date(game?.first_release_date * 1000);
-  const imageUrl =  game?.artworks ? game?.artworks[0]?.url.replace('t_thumb', 't_1080p') : '';
-  const isInCart = game && inCart.includes(game?.id);
+  const imageUrl =  game?.artworks ? game?.artworks[0]?.url.replace('t_thumb', 't_1080p') : noImage;
+  const isInCart = game && cartItems.includes(game?.id);
   const formattedDate = releaseDate?.toLocaleDateString();
   return (
     <div className="game-detail">

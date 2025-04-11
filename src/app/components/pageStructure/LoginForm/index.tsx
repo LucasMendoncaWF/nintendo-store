@@ -1,7 +1,7 @@
 import { useUserStore } from 'app/stores/userStore';
 import './loginForm.scss';
 import { loginPost } from 'app/services/login';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import Loader from 'app/components/shared/Loader';
 
@@ -10,13 +10,6 @@ export default function LoginForm() {
   const {toggleLoginModal, isLoginModalOpen, login, isLoggedIn} = useUserStore();
   const [fields, setFields] = useState<Record<string, string>>({email: '', password: ''});
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    if(userData) {
-      login(JSON.parse(userData));
-    }
-  }, [login])
 
   const {
     mutate: loginMutation,

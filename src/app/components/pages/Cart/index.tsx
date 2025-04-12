@@ -1,13 +1,13 @@
 import { useGetGamesById, useGetTotalPages } from 'app/services/gamesSearch';
-import './cart.scss';
 import { useState } from 'react';
 import { useCartStore } from 'app/stores/cartStore';
 import ErrorMessage from 'app/components/shared/ErrorMessage';
-import Pagination from 'app/components/shared/GamesList/Pagination';
 import { Link } from 'react-router-dom';
 import Loader from 'app/components/shared/Loader';
 import CartItem from './CartItem';
 import { useUserStore } from 'app/stores/userStore';
+import Pagination from 'app/components/shared/GamesList/Pagination';
+import './cart.scss';
 
 export default function CartPage () {
   const {isLoggedIn, toggleLoginModal} = useUserStore();
@@ -28,7 +28,6 @@ export default function CartPage () {
   games?.forEach(game => {
     totalPrice += Number(game.price);
   });
-  const showPagination = totalPages && totalPages > 1 && games?.length;
   const showList = !isError && !isLoading && games?.length;
   return (
     <div className="cart-page">
@@ -40,7 +39,7 @@ export default function CartPage () {
               <Loader />
             </div>
           }
-          {!games?.length && 
+          {!games?.length && !isLoading && 
             <div className='d-flex justify-content-center wrap'>
               <ErrorMessage message='Your cart looks empty, you can add games here by clicking on the "Add to cart" button on them!' />
               <Link className='store-link' to='/list'>Search some games!</Link>
@@ -55,25 +54,24 @@ export default function CartPage () {
           {showList && 
             <>
               <div className='cart-page__games-list'>
-                {games?.map(game => <CartItem game={game}/>)}
-                {showPagination && 
-                  <div className='cart-page__pagination'>
-                    {<Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={(page) => setCurrentPage(page)}/>}
-                  </div>
-                }
+                {games?.map(game => <CartItem key={game.id} game={game}/>)}
+                <div className='cart-page__pagination'>
+                  <Pagination gamesLength={games.length} totalPages={totalPages} currentPage={currentPage} onPageChange={(page) => setCurrentPage(page)}/>
+                </div>
               </div>
               <div className='cart-page__total d-flex space-between'>
                 <div>Total</div>
                 <div>${totalPrice.toFixed(2)}</div>
               </div>
             
-              <div className='cart-page__pay-button d-flex'>
-                {isLoggedIn ? 
-                  <button>Complete purchase</button>
-                  : <button onClick={() => toggleLoginModal(true)}>Log In to purchase</button>
-                }
-
-              </div>
+              <Link onClick={() => !isLoggedIn && toggleLoginModal(true)} to={isLoggedIn ? '/payment' : '#'} className='cart-page__pay-area d-flex'>
+                <div className='cart-page__pay-button'>
+                  {isLoggedIn ?
+                    'Complete purchase' :
+                    'Log In to purchase'
+                  }
+                </div>
+              </Link>
             </>
           }
         </div>

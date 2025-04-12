@@ -37,7 +37,7 @@ const mocks = {
 }
 
 exports.handler = async (event) => {
-  const eventName = event.path.replace("/.netlify/functions/mocks/", "");
+  const eventName = event.path.replace("/.netlify/functions/banners/", "");
   try {
     const data = JSON.stringify(mocks[eventName]);
 

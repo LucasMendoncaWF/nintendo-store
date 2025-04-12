@@ -1,15 +1,23 @@
 import './pagination.scss';
+
 interface Props {
   currentPage: number;
-  totalPages: number;
+  totalPages?: number;
+  gamesLength?: number;
   onPageChange: (page: number) => void;
 }
 
 export default function Pagination ({
   currentPage,
   totalPages,
+  gamesLength,
   onPageChange,
 }: Props) {
+
+  if(!totalPages || totalPages <=1 || !gamesLength) {
+    return null;
+  }
+
   const lastPage = Math.ceil(totalPages);
   const pagesRendered = () => {
     let pageRendered = currentPage < 3 ? 3 : currentPage;
@@ -50,7 +58,14 @@ export default function Pagination ({
       <button className='pagination__arrow' onClick={() => currentPage > 1 && onPageChange(1)}>&lt;&lt;</button>
       <button className='pagination__arrow' onClick={() => currentPage > 1 && onPageChange(currentPage-1)}>&lt;</button>
       {pages?.map(page => 
-        <button className={currentPage === page.value ? 'selected' : ''} onClick={() => onPageChange(page.value)} key={page.value}>{page.isLast && '...'} {page.value}</button>
+        <button 
+          className={currentPage === page.value ? 'selected' : ''} 
+          onClick={() => onPageChange(page.value)} 
+          key={page.value}
+        >
+          {page.isLast && '...'} 
+          {page.value}
+        </button>
       )}
       <button className='pagination__arrow' onClick={() => currentPage < Math.ceil(lastPage) && onPageChange(currentPage+1)}>&gt;</button>
       <button className='pagination__arrow' onClick={() => currentPage < Math.ceil(lastPage) && onPageChange(lastPage)}>&gt;&gt;</button>

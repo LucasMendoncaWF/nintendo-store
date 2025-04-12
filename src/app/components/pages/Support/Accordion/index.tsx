@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import './accordion.scss';
+
 interface Props {
   title: string;
   children : ReactNode;

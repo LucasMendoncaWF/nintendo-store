@@ -1,5 +1,6 @@
-import './notFound.scss';
 import Mario404 from 'assets/images/mario_404.png';
+import './notFound.scss';
+
 export default function NotFound () {
   return (
     <div className='page-404 d-flex'>

@@ -1,3 +1,4 @@
+import { maxInCart } from 'app/constants/constants';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -16,11 +17,13 @@ export const useCartStore = create<CartStore>()(
           return;
         }
         const inCart = get().cartItems;
-        let newCart = [];
+        let newCart: number[] = [];
         if(inCart.includes(gameId)) {
           newCart = inCart.filter((id: number) => id !== gameId);
-        } else {
+        } else if(inCart.length < maxInCart)  {
           newCart = [...inCart, gameId];
+        } else {
+          return;
         }
         set({cartItems: newCart})
       },

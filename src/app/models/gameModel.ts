@@ -26,6 +26,7 @@ export interface GameGenreModel {
 
 export interface FiltersModel {
   page: number;
+  pageLimit?: number;
   searchTerm?: string;
   totalPages?: number;
   ids?: number[];

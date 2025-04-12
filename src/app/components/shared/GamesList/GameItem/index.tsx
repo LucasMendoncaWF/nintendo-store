@@ -2,11 +2,13 @@ import { GameModel } from 'app/models/gameModel';
 import heart from 'assets/images/heart.png';
 import heartFilled from 'assets/images/heart_filled.png';
 import noImage from 'assets/images/no-image.jpg';
-import './gameItem.scss';
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartStore } from 'app/stores/cartStore';
 import { useWishlistStore } from 'app/stores/wishlistStore';
+import './gameItem.scss';
+import { maxInCart } from 'app/constants/constants';
+
 interface Props {
   game: GameModel;
 }
@@ -36,10 +38,11 @@ export default function GameItem ({
     onClickWishlist(gameId);
   }
 
-  const isOnCart = cartItems.includes(game.id);
+  const isinCart = cartItems.includes(game.id);
   const releaseDate = new Date(game.first_release_date * 1000);
   const imageUrl =  game.artworks ? game.artworks[0]?.url?.replace('t_thumb', 't_720p') : noImage;
   const formattedDate = releaseDate.toLocaleDateString();
+  const canAddToCart = cartItems.length < maxInCart || isinCart;
   return (
     <div className="game-item">
       <Link to={`/game/${game.id}`}>
@@ -52,14 +55,18 @@ export default function GameItem ({
           <div className="d-flex space-between">
             <button
               ref={buttonRef}
+              disabled={!canAddToCart}
               onClick={(e) => {
+                if(!canAddToCart) {
+                  return;
+                }
                 onAddToCart(e, game.id);
                 buttonRef.current?.blur();
-                setAddedToCart(!isOnCart);
+                setAddedToCart(!isinCart);
               }}
-              className={`game-item__add-cart ${isOnCart ? 'on-cart' : ''}`}
+              className={`game-item__add-cart ${isinCart ? 'on-cart' : ''}`}
             >
-              {!isOnCart ? 'Add to cart' : 'On cart'}
+              {!isinCart ? 'Add to cart' : 'In cart'}
             </button>
             <button className="game-item__add-wishlist"onClick={(e) => onAddToWishList(e, game.id)}>
               <img className="game-item__heart" alt="add to wishlist button" src={heartIcon} />

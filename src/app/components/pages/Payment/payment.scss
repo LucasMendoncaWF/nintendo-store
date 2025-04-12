@@ -1,0 +1,85 @@
+@use './assets/styles/variables.scss' as *;
+
+.payment-page {
+  &__title {
+    color: $white;
+    background-color: $primary;
+    padding: 20px;
+    font-size: 25px;
+    margin: 0;
+  }
+
+  &__content {
+    min-height: calc(100vh - 200px);
+    width: 100%;
+    max-width: 800px;
+    background-color: $white;
+    position: relative;
+    padding-bottom: 54px;
+    box-shadow: 1px 1px 4px 3px rgba($black, 0.08);
+  }
+
+  &__total {
+    padding: 20px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid $gray;
+
+    @media screen and (max-width: 800px) {
+      padding: 20px;
+    }
+  }
+
+  &__method {
+    width: calc(100% - 40px);
+    padding: 20px;
+    border-bottom: 1px solid $gray;
+
+    &__title {
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: $gray;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    &__content {
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.5s;
+      padding: 0 5px;
+    }
+  }
+
+  &__method.open {
+    .payment-page__arrow {
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+
+    .payment-page__method__content {
+      max-height: unset;
+      padding: 10px 5px;
+    }
+  }
+
+  &__arrow {
+    border: solid $gray;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    width: 4px;
+    height: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}

@@ -1,9 +1,10 @@
 import {useEffect } from "react";
 import Loader from "../Loader";
 import GameItem from "./GameItem";
-import './gamesList.scss';
 import { GameModel } from "app/models/gameModel";
 import ErrorMessage from "../ErrorMessage";
+import './gamesList.scss';
+
 interface Props {
   title: string;
   games?: GameModel[];
@@ -36,10 +37,10 @@ export default function GamesList ({
           </h2>
         }
         
-        {!isLoading && games?.map((game, index) => (
+        {!isLoading && games?.map(game => (
           <GameItem 
             game={game} 
-            key={`${index}_${game.id} `}
+            key={game.id}
           />
         ))}
       </div>

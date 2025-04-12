@@ -1,6 +1,7 @@
 import Accordion from './Accordion';
-import ContactForm from './ContatForm';
+import ContactForm from './ContactForm';
 import './support.scss';
+
 export default function Support () {
   return (
     <div className='support-page d-flex space-between'>

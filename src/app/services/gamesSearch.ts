@@ -2,8 +2,7 @@ import { FiltersModel, GameModel } from "app/models/gameModel";
 import api from "./api";
 import { useQuery } from "@tanstack/react-query";
 import QueryKeys from "./queryKeys";
-
-export const maxPerPage = 28;
+import { maxPerPage } from "app/constants/constants";
 
 export function useGetRecentGamesList() {
   const query = {fields: '*, artworks.url, genres.name', limit: 6};
@@ -42,9 +41,10 @@ export function useGetAllGames({
 
 export function useGetGamesById({
   page,
-  ids
+  ids,
+  pageLimit
 }: FiltersModel) {
-  const pageSize = maxPerPage;
+  const pageSize = pageLimit || maxPerPage;
   const query = {fields: '*, artworks.url, genres.name', ids, limit: pageSize, offset: pageSize * (page - 1)};
   return useQuery<GameModel[]>({
     queryKey: [QueryKeys.allGames, page, ids],

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import './footer.scss';
 import { useUserStore } from 'app/stores/userStore';
+import './footer.scss';
+
 export default function Footer() {
   const {isLoggedIn} = useUserStore();
   return (

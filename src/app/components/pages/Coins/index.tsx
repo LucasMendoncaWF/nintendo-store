@@ -2,9 +2,9 @@ import CoinsBanner from 'assets/images/coins-banner.jpg';
 import CoinsBannerMobile from 'assets/images/coins-banner-mobile.jpg';
 import CoinsContainer from 'assets/images/coin-container.png';
 import CoinsContainerBack from 'assets/images/coin-container-back.png';
-import './coins.scss';
 import { useRef, useState } from 'react';
 import { useUserStore } from 'app/stores/userStore';
+import './coins.scss';
 
 export default function Coins () {
   const {isLoggedIn, toggleLoginModal} = useUserStore();

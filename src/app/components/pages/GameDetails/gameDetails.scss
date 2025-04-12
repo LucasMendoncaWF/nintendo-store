@@ -112,7 +112,12 @@
       }
     }
 
-    &:hover {
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    &:not(:disabled):hover {
       border-bottom: 2px solid $green;
       transform: scale(1.1);
     }

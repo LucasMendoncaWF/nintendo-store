@@ -3,6 +3,7 @@
 .accordion {
   border-bottom: 1px solid rgba($gray, 0.5);
   margin: 5px 0;
+  padding: 5px;
 
   &__title {
     font-weight: bold;
@@ -17,11 +18,11 @@
   }
 
   &__content {
-    padding: 5px;
     max-height: 0;
     overflow: hidden;
     transition: 0.2s;
     color: $gray;
+    padding: 0 5px;
 
     &.open {
       max-height: 200px;

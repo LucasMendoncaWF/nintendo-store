@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import './searchFilter.scss';
 import searchIcon from 'assets/images/search.png';
 import { useSearchParams } from 'react-router-dom';
+import './searchFilter.scss';
 
 interface Props {
   onSetSearchTerm: (name: string) => void;

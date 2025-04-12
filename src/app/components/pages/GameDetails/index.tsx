@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import heart from 'assets/images/heart.png';
 import heartFilled from 'assets/images/heart_filled.png';
-import './gameDetails.scss'
 import GameTag from "app/components/shared/GameTag";
 import Loader from "app/components/shared/Loader";
 import ErrorMessage from "app/components/shared/ErrorMessage";
 import { useCartStore } from "app/stores/cartStore";
 import { useWishlistStore } from "app/stores/wishlistStore";
 import noImage from 'assets/images/no-image.jpg';
+import './gameDetails.scss'
+import { maxInCart } from "app/constants/constants";
 
 export default function GameDetails () {
   const params = useParams();
@@ -52,8 +53,9 @@ export default function GameDetails () {
 
   const releaseDate = game && new Date(game?.first_release_date * 1000);
   const imageUrl =  game?.artworks ? game?.artworks[0]?.url.replace('t_thumb', 't_1080p') : noImage;
-  const isInCart = game && cartItems.includes(game?.id);
+  const isinCart = game && cartItems.includes(game?.id);
   const formattedDate = releaseDate?.toLocaleDateString();
+  const canAddToCart = cartItems.length < maxInCart || isinCart;
   return (
     <div className="game-detail">
     <div>
@@ -80,12 +82,16 @@ export default function GameDetails () {
                 <p className="game-detail__price">${game?.price}</p>
                 <div className="d-flex space-between">
                   <button 
+                  disabled={!canAddToCart}
                   onClick={(e) => {
+                    if(!canAddToCart) {
+                      return;
+                    }
                     game && onAddToCart(e, game?.id)
                   }}
-                    className={`game-detail__add-cart ${isInCart ? 'on-cart' : ''}`}
+                    className={`game-detail__add-cart ${isinCart ? 'on-cart' : ''}`}
                   >
-                    {!isInCart ? 'Add to cart' : 'On cart'}
+                    {!isinCart ? 'Add to cart' : 'In cart'}
                   </button>
                   <button className="game-detail__add-wishlist"onClick={(e) => game && onAddToWishlist(e, game.id)}>
                     <img className="game-detail__heart" alt="add to wishlist button" src={heartIcon} />

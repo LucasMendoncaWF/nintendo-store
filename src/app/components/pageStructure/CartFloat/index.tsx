@@ -7,7 +7,9 @@ export default function CartFloat () {
   const {cartItems} = useCartStore();
   const location = useLocation();
   const count = cartItems.length;
-  if(!cartItems.length || location.pathname.includes('cart')) {
+  const hideOnPages = ['cart', 'payment', 'user', 'online-game'];
+ 
+  if(!cartItems.length || hideOnPages.some(page => location.pathname.includes(page))) {
     return null;
   }
   return (

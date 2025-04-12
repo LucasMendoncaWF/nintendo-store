@@ -1,6 +1,6 @@
 import { HomeBannerModel } from 'app/models/HomeBannerModel';
-import './secondaryBannerItem.scss';
 import { Link } from "react-router-dom";
+import './secondaryBannerItem.scss';
 
 interface Props {
   banner: HomeBannerModel;

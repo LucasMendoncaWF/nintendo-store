@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './store.scss';
 import SearchFilter from 'app/components/shared/GamesList/SearchFilter';
 import GamesList from 'app/components/shared/GamesList';
 import { useGetAllGames, useGetTotalPages } from 'app/services/gamesSearch';
 import Pagination from 'app/components/shared/GamesList/Pagination';
+import './store.scss';
 
 export default function Store () {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -18,8 +18,6 @@ export default function Store () {
   const {
     data: totalPages,
   } = useGetTotalPages({searchTerm, page: currentPage});
-
-  const showPagination = totalPages && totalPages > 1;
 
   return (
     <div className="store-container">
@@ -37,8 +35,7 @@ export default function Store () {
       title='All Games'
       hasAutoScroll
     />
-    
-    {setCurrentPage && showPagination && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={(page) => setCurrentPage(page)}/>}
+    <Pagination gamesLength={games?.length} totalPages={totalPages} currentPage={currentPage} onPageChange={(page) => setCurrentPage(page)}/>
     </div>
   )
 }

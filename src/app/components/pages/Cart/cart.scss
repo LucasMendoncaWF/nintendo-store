@@ -27,8 +27,7 @@
   }
 
   &__pagination {
-    transform: scale(0.8);
-    margin-bottom: -30px;
+    transform: scale(0.8) translateY(30px);
   }
 
   &__games-list {
@@ -45,7 +44,7 @@
     }
   }
 
-  &__pay-button {
+  &__pay-area {
     justify-content: end;
     background-color: $primary;
     color: $white;
@@ -53,23 +52,23 @@
     position: absolute;
     bottom: 0;
     width: calc(100% - 40px);
+  }
 
-    button {
-      background-color: $white;
-      color: $black;
-      border: 0;
-      padding: 10px 30px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 12px;
+  &__pay-button {
+    background-color: $white;
+    color: $black;
+    border: 0;
+    padding: 10px 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 12px;
 
-      &:hover {
-        opacity: 0.7;
-      }
+    &:hover {
+      opacity: 0.7;
     }
   }
 }

@@ -8,7 +8,7 @@ export function useGetHomeBanners() {
   return useQuery<HomeBannerModel[]>({
     queryKey: [QueryKeys.primaryBanner],
     queryFn: () => 
-      api.get("mocks/homeBanners").catch((error) => {
+      api.get("banners/homeBanners").catch((error) => {
         return error.response.data; 
       }).then((response) => {
         return response.data as HomeBannerModel[];
@@ -20,7 +20,7 @@ export function useGetSecondaryBanners() {
   return useQuery<HomeBannerModel[]>({
     queryKey: [QueryKeys.secondaryBanner],
     queryFn: () => 
-      api.get("mocks/secondaryBanners").catch((error) => {
+      api.get("banners/secondaryBanners").catch((error) => {
         return error.response.data; 
       }).then((response) => {
         return response.data;

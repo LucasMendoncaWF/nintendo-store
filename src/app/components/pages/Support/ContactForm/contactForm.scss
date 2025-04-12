@@ -5,16 +5,6 @@
   margin-top: 30px;
   position: relative;
 
-  &__input {
-    border: 2px solid $primary;
-    width: calc(100% - 4px - 40px);
-    border-radius: 10px;
-    padding: 10px 20px;
-    background-color: transparent;
-    margin: 10px 0;
-    resize: none;
-  }
-
   button {
     background-color: $primary;
     color: $white;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './contactForm.scss';
 import Loader from 'app/components/shared/Loader';
+import './contactForm.scss';
 
 export default function ContactForm () {
   const initialValue = {email: '', name: '', subject: '', message: ''};
@@ -29,10 +29,10 @@ export default function ContactForm () {
   }
   return (
     <form onSubmit={onSendMessage} className='contact-form'>
-      <input onChange={onInputUpdate} value={fields.email} className='contact-form__input' name='email' type='email' placeholder='E-mail'/>
-      <input onChange={onInputUpdate} value={fields.name} className='contact-form__input' name='name' type='text' placeholder='Name'/>
-      <input onChange={onInputUpdate} value={fields.subject} className='contact-form__input' name='subject' type='text' placeholder='Subject'/>
-      <textarea onChange={onInputUpdate} value={fields.message} className='contact-form__input' name="message" rows={6} placeholder='Message'/>
+      <input required onChange={onInputUpdate} value={fields.email} className='primary-input' name='email' type='email' placeholder='E-mail'/>
+      <input required onChange={onInputUpdate} value={fields.name} className='primary-input' name='name' type='text' placeholder='Name'/>
+      <input required onChange={onInputUpdate} value={fields.subject} className='primary-input' name='subject' type='text' placeholder='Subject'/>
+      <textarea required onChange={onInputUpdate} value={fields.message} className='primary-input' name="message" rows={6} placeholder='Message'/>
       <button type='submit'>Send</button>
       {isLoading && 
         <div className='contact-form__loader'>

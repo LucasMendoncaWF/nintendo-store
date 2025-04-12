@@ -1,6 +1,6 @@
-import './product.scss';
 import { useParams } from 'react-router-dom';
 import { useGetProduct } from 'app/services/products';
+import './product.scss';
 
 export default function Product () {
   const params = useParams();

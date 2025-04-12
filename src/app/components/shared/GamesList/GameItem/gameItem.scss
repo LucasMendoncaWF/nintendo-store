@@ -109,6 +109,9 @@
       text-overflow: ellipsis;
       overflow: hidden;  
       margin-bottom: 12px;
+      @media screen and (max-width: 1500px) {
+        height: 40px;
+      }
     }
   }
 
@@ -145,7 +148,12 @@
       }
     }
 
-    &:hover {
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    &:not(:disabled):hover {
       border-bottom: 2px solid $green;
       transform: scale(1.1);
     }

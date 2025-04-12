@@ -1,9 +1,9 @@
 import logo from 'assets/images/logo.png';
 import userIcon from 'assets/images/user_icon.png';
-import './header.scss';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useUserStore } from 'app/stores/userStore';
+import './header.scss';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,6 +12,7 @@ export default function Header() {
 
   const onClickLink = () => {
     setIsMobileMenuOpen(false);
+    setShowUserMenu(false);
   }
 
   return (
@@ -35,7 +36,7 @@ export default function Header() {
           </div>
         </Link>
       : 
-        <Link to='#' onClick={() => setShowUserMenu(true)} className='hide-mobile'>
+        <Link to='#' onClick={() => setShowUserMenu(!showUserMenu)} className='hide-mobile'>
           <div className='sign-in d-flex align-center'>
           <img className='sign-in-icon' src={userIcon} alt="user icon to sign in" />
           <p>{userData?.name}</p>
@@ -45,9 +46,9 @@ export default function Header() {
 
       {showUserMenu && isLoggedIn && 
         <div className='hide-mobile logged-menu' >
-          <Link to='/wishlist'><div className="logged-link">Wishlist</div></Link>
-          <Link to='/configuration'><div className="logged-link">Configuration</div></Link>
-          <Link to='#' onClick={() => logout()}><div className="logged-link">Sign Out</div></Link>
+          <Link onClick={onClickLink} to='/wishlist'><div className="logged-link">Wishlist</div></Link>
+          <Link onClick={onClickLink}to='/configuration'><div className="logged-link">Configuration</div></Link>
+          <Link to='#' onClick={() => {logout(); onClickLink();}}><div className="logged-link">Sign Out</div></Link>
         </div>
       }
       <div className='mobile-menu show-mobile'>
@@ -66,6 +67,7 @@ export default function Header() {
             {!isLoggedIn && 
               <Link to='#' onClick={() => {
                 toggleLoginModal(true);
+                setShowUserMenu(false);
                 setIsMobileMenuOpen(false);
               }}>
                   <div className="mobile-link">Sign In</div>

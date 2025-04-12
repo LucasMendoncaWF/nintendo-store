@@ -91,6 +91,16 @@ h1, h2, h3, h4 {
   cursor: not-allowed !important;
 }
 
+.primary-input {
+  border: 2px solid $primary;
+  width: calc(100% - 4px - 40px);
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: transparent;
+  margin: 10px 0;
+  resize: none;
+}
+
 @keyframes loadBanner {
   0%{
     background-color: $primary;

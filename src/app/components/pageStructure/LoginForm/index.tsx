@@ -1,9 +1,9 @@
 import { useUserStore } from 'app/stores/userStore';
-import './loginForm.scss';
 import { loginPost } from 'app/services/login';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import Loader from 'app/components/shared/Loader';
+import './loginForm.scss';
 
 export default function LoginForm() {
 
@@ -73,11 +73,11 @@ export default function LoginForm() {
         <div className='login__modal__title'>Sign In</div>
         <div>
           <label>E-mail</label>
-          <input onChange={onInputUpdate} value={fields.email} name='email' className='login__modal__input' required type='email' />
+          <input onChange={onInputUpdate} value={fields.email} name='email' className='primary-input' required type='email' />
         </div>
         <div>
           <label>Password</label>
-          <input onChange={onInputUpdate} value={fields.password} name='password' className='login__modal__input' required type='password' />
+          <input onChange={onInputUpdate} value={fields.password} name='password' className='primary-input' required type='password' />
         </div>
         <div className='login__modal__forgot'>Forgot my password</div>
         <div className='d-flex space-between'>

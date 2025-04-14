@@ -1,7 +1,13 @@
 import './errorMessage.scss';
-export default function ErrorMessage({message}: {message: string}) {
+
+interface Props {
+  message: string;
+  type?: 'small-rounded';
+}
+
+export default function ErrorMessage({message, type}: Props) {
   return (
-    <div className="error-message">
+    <div className={`error-message error-message--${type || 'default'}`}>
       {message}
     </div>
   )

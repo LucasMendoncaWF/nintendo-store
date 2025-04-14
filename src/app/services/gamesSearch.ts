@@ -60,6 +60,27 @@ export function useGetGamesById({
   })
 }
 
+export function useGetCartGames({
+  page,
+  ids,
+  pageLimit
+}: FiltersModel) {
+  const pageSize = pageLimit || maxPerPage;
+  const query = {fields: '*, artworks.url, genres.name', ids, limit: pageSize, offset: pageSize * (page - 1)};
+  return useQuery<GameModel[]>({
+    queryKey: [QueryKeys.allGames, page, ids],
+    queryFn: () => 
+      api.post("igdb/games/cart", 
+        query
+      ).then(response => {
+        return response.data;
+      }).catch((error) => {
+        return error;
+      }),
+      enabled: !!(ids && ids.length)
+  })
+}
+
 export function useGetTotalPages({
   page,
   searchTerm,
@@ -83,7 +104,7 @@ export function useGetTotalPages({
 }
 
 export function useFetchGame(id: string) {
-  const query = {fields: '*, cover.url, artworks.url, genres.name, screenshots.url', ids: [id]};
+  const query = {fields: '*, cover.url, artworks.url, genres.name, screenshots.url, expanded_games.name', ids: [id]};
   return useQuery<GameModel>({
     queryKey: [QueryKeys.singleGame, query.ids],
     queryFn: () => 

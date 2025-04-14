@@ -40,7 +40,7 @@ export default function Pagination ({
 
     if(totalPages < 5) {
       const result = Array.from({ length: Math.ceil(totalPages) }, (_, i) => i + 1);
-      rendered = result.map(number => {
+      rendered = result?.map(number => {
         return {
           value: number, 
         }

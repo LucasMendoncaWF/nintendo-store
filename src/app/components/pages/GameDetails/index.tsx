@@ -1,7 +1,7 @@
 import GamesList from "app/components/shared/GamesList";
-import { useFetchGame, useGetRecentGamesList } from "app/services/gamesSearch";
+import { useFetchGame, useGetGamesById, useGetRecentGamesList } from "app/services/gamesSearch";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import heart from 'assets/images/heart.png';
 import heartFilled from 'assets/images/heart_filled.png';
 import GameTag from "app/components/shared/GameTag";
@@ -10,8 +10,10 @@ import ErrorMessage from "app/components/shared/ErrorMessage";
 import { useCartStore } from "app/stores/cartStore";
 import { useWishlistStore } from "app/stores/wishlistStore";
 import noImage from 'assets/images/no-image.jpg';
-import './gameDetails.scss'
 import { maxInCart } from "app/constants/constants";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import './gameDetails.scss'
 
 export default function GameDetails () {
   const params = useParams();
@@ -29,6 +31,12 @@ export default function GameDetails () {
     data: gamesList,
     isError: isListError,
     isFetching: isListLoading
+  } = useGetGamesById({ids: game?.similar_games, page: 1});
+
+  const {
+    data:recentGamesList,
+    isError: isRecentListError,
+    isFetching: isRecentListLoading
   } = useGetRecentGamesList();
 
   const onAddToWishlist = (e: React.MouseEvent, gameId: number) => {
@@ -56,6 +64,7 @@ export default function GameDetails () {
   const isinCart = game && cartItems.includes(game?.id);
   const formattedDate = releaseDate?.toLocaleDateString();
   const canAddToCart = cartItems.length < maxInCart || isinCart;
+  const isSimilarEmpty = !isListError && !gamesList?.length && !isListLoading;
   return (
     <div className="game-detail">
     <div>
@@ -78,7 +87,6 @@ export default function GameDetails () {
                     <GameTag key={genre.id} tagName={genre.name}/>
                   )}
                 </div>
-                <div className="game-detail__summary">{game?.summary}</div>
                 <p className="game-detail__price">${game?.price}</p>
                 <div className="d-flex space-between">
                   <button 
@@ -102,15 +110,45 @@ export default function GameDetails () {
           </div>
         </div>
       }
+
+    {!isFetching && 
+      <div className="game-detail__details d-flex justify-content-center wrap">
+        <Carousel autoPlay infiniteLoop interval={3000}>
+        {game?.screenshots?.map(image => 
+            <div key={image.id} ><img src={image.url.replace('t_thumb', 't_1080p')} alt="game screenshot"/></div>
+          )}
+        </Carousel>
+        <div className="game-detail__summary">
+          <div>{game?.summary}</div>
+          {game?.expanded_games?.length  && 
+            <div className="game-detail__dlcs">
+              <div className="game-detail__dlcs__title">Expansions</div>
+              {game?.expanded_games?.map(expansionGame => 
+                <Link className="game-detail__dlc" to={`/game/${expansionGame.id}`}><div>{expansionGame.name}</div></Link>
+              )}
+            </div>
+          }
+        </div>
+      </div>
+    }
       
     </div>
-    <GamesList 
-      games={gamesList?.filter(currGame => currGame.id !== game?.id)}
-      hasError={isListError}
-      isEmptyResponse={!isListError && !gamesList?.length && !isListLoading}
-      isLoading={isListLoading}
-      title='Similar Games'
-    />
+    {(!isSimilarEmpty && !isFetching && !isListLoading) ?
+      <GamesList 
+        games={gamesList?.filter(currGame => currGame.id !== game?.id)}
+        hasError={isListError}
+        isLoading={isListLoading || isFetching}
+        title='Similar Games'
+      />
+      : 
+      <GamesList 
+        games={recentGamesList?.filter(currGame => currGame.id !== game?.id)}
+        hasError={isRecentListError}
+        isEmptyResponse={!isRecentListError && !isRecentListLoading && !recentGamesList?.length && !isListLoading}
+        isLoading={isRecentListLoading || isFetching}
+        title='Similar Games'
+      />
+    }
     </div>
   )
 }

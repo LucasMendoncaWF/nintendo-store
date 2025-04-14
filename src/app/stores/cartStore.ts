@@ -6,6 +6,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 type CartStore = {
   cartItems: number[];
   onClickCart: (gameId?: number) => void;
+  emptyCart: () => void;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -27,6 +28,9 @@ export const useCartStore = create<CartStore>()(
         }
         set({cartItems: newCart})
       },
+      emptyCart() {
+        set({cartItems: []});
+      }
     }),
     {
       name: 'nintendo-cart',

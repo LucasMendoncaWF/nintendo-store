@@ -1,4 +1,4 @@
-import { useGetGamesById, useGetTotalPages } from 'app/services/gamesSearch';
+import { useGetCartGames, useGetTotalPages } from 'app/services/gamesSearch';
 import { useState } from 'react';
 import { useCartStore } from 'app/stores/cartStore';
 import ErrorMessage from 'app/components/shared/ErrorMessage';
@@ -18,7 +18,7 @@ export default function CartPage () {
     data:games,
     isError,
     isLoading
-  } = useGetGamesById({ids: cartItems, page: currentPage});
+  } = useGetCartGames({ids: cartItems, page: currentPage});
   
   const {
     data:totalPages,

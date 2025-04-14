@@ -1,87 +1,126 @@
 const axios = require("axios");
 
 const mockPrice = (name) => {
-  name = name.toLowerCase();
-  let price = 5.22;
-  if('abcdef'.includes(name[0])) {
-    price = 41.50;
-  }
+  const firstLetter = name.toLowerCase()[0];
+  if ('abcdef'.includes(firstLetter)) return 41.50;
+  if ('ghijk'.includes(firstLetter)) return 60.50;
+  if ('lmnopqrs'.includes(firstLetter)) return 10.50;
+  if ('tuvxzw'.includes(firstLetter)) return 32.50;
+  return 5.22;
+};
 
-  if('ghijk'.includes(name[0])) {
-    price = 60.50;
-  }
+const buildHeaders = (event) => ({
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "text/plain",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, Client-ID",
+  "Authorization": event.headers?.authorization || "",
+  "Client-ID": event.headers?.["client-id"] || ""
+});
 
-  if('lmnopqrs'.includes(name[0])) {
-    price = 10.50;
-  }
+const endPoints = {
+  count: async (headers, body) => {
+    const response = await axios.post("https://api.igdb.com/v4/games/count", body, {
+      headers
+    });
 
-  if('tuvxzw'.includes(name[0])) {
-    price = 32.50;
-  }
-
-  return price;
-}
-
-exports.handler = async (event) => {
-  const newHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": 'text/plain',
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, Client-ID",
-    "Authorization": event.headers?.authorization || "", 
-    "Client-ID": event.headers?.["client-id"] || ""
-  };
-  const requestBody = event.body ? JSON.parse(event.body) : {};
-
-  let newBody = '';
-  if(requestBody.name) {
-    newBody+= `search "${requestBody.name}"; `
-  }
-  newBody +=`fields ${requestBody.fields}; `;
-  newBody+= `where platforms = 130 & first_release_date < ${(new Date().getTime() / 1000).toFixed()}${requestBody.ids? ` & id=(${requestBody.ids.join(', ')})` : ''}; `
-  if(!requestBody.name){
-    newBody+= `sort first_release_date desc; `; 
-  }
-  if(requestBody.limit) {
-    newBody += `limit ${requestBody.limit}; `;
-  }
-  if(requestBody.offset !== undefined) {
-    newBody += ` offset ${requestBody.offset}; `;
-  }
-
-  try {
-    if (event.httpMethod === "OPTIONS") {
-      return {
-        statusCode: 200,
-        headers: newHeaders,
-        body: "OK",
-      };
-    }
-    const endpoint = event.path.replace("/.netlify/functions/igdb/", "");
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-    const response = await axios.post(
-      `https://api.igdb.com/v4/${endpoint}`,
-      newBody,
-      {
-        headers: newHeaders
-      }
-    );
     return {
       statusCode: 200,
-      body: JSON.stringify(endpoint.includes('count') ? response.data : 
-      response.data.map(game => {
-        return {
-          ...game,
-          price: mockPrice(game.name)
-        }
-      })),
+      body: JSON.stringify(response.data),
     };
+  },
+
+  cart: async (headers, body) => {
+    const response = await axios.post("https://api.igdb.com/v4/games", body, {
+      headers
+    });
+
+    const enrichedGames = response.data.map(game => ({
+      ...game,
+      price: mockPrice(game.name)
+    }));
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(enrichedGames),
+    };
+  },
+
+  default: async (headers, body) => {
+    const response = await axios.post("https://api.igdb.com/v4/games", body, {
+      headers
+    });
+
+    const enrichedGames = response.data.map(game => ({
+      ...game,
+      price: mockPrice(game.name)
+    }));
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(enrichedGames),
+    };
+  }
+}
+
+const buildBody = (requestBody, isCart) => {
+  let query = "";
+
+  if (requestBody.name) {
+    query += `search "${requestBody.name}"; `;
+  }
+
+  query += `fields ${requestBody.fields}; `;
+
+  const whereFields = [];
+
+  if (!requestBody.fields?.includes("expanded_games") && !isCart) {
+    const timestamp = Math.floor(Date.now() / 1000);
+    whereFields.push(`platforms = 130 & first_release_date < ${timestamp}`);
+  }
+
+  if (requestBody.ids) {
+    whereFields.push(`id=(${requestBody.ids.join(", ")})`);
+  }
+
+  if (whereFields.length > 0) {
+    query += `where ${whereFields.join(" & ")}; `;
+  }
+
+  if (!requestBody.name) {
+    query += `sort first_release_date desc; `;
+  }
+
+  if (requestBody.limit) {
+    query += `limit ${requestBody.limit}; `;
+  }
+
+  if (requestBody.offset !== undefined) {
+    query += `offset ${requestBody.offset}; `;
+  }
+
+  return query;
+};
+
+exports.handler = async (event) => {
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: buildHeaders(event),
+      body: "OK",
+    };
+  }
+
+  const headers = buildHeaders(event);
+  const requestBody = event.body ? JSON.parse(event.body) : {};
+  const endpoint = event.path.replace('/.netlify/functions/igdb/games', '').replace('/', '');
+  const body = buildBody(requestBody, endpoint === 'cart');
+  try {
+    return await endPoints[!!endpoint ? endpoint : 'default'](headers, body);
   } catch (error) {
     return {
       statusCode: error.response?.status || 500,
-      headers: newHeaders,
-      body: JSON.stringify(
-        error.message
-      ),
+      headers,
+      body: JSON.stringify(error.message),
     };
   }
 };

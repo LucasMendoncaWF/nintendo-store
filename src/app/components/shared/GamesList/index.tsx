@@ -10,7 +10,7 @@ interface Props {
   games?: GameModel[];
   isLoading: boolean;
   hasError: boolean;
-  isEmptyResponse: boolean;
+  isEmptyResponse?: boolean;
   hasAutoScroll?: boolean
 }
 
@@ -37,7 +37,7 @@ export default function GamesList ({
           </h2>
         }
         
-        {!isLoading && games?.map(game => (
+        {!isLoading && !hasError && games?.map(game => (
           <GameItem 
             game={game} 
             key={game.id}

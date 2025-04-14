@@ -5,7 +5,6 @@ $breakpoint: 1000px;
 .product-page {
 
   .d-flex {
-    
     @media screen and (max-width: $breakpoint) {
       display: block;
     }
@@ -80,9 +79,29 @@ $breakpoint: 1000px;
       padding: 0;
     }
 
+    &__loading {
+      width: 100%;
+      min-height: 350px;
+      animation: bannerLoading 2s infinite;
+    }
+
     img {
       width: 100%;
       margin-bottom: -5px;
+    }
+  }
+
+  @keyframes bannerLoading {
+    0%{
+      background-color: rgba($light-gray, 0.8);
+    }
+
+    50%{
+      background-color: rgba($light-gray, 0.4);
+    }
+
+    100%{
+      background-color: rgba($light-gray, 0.8);
     }
   }
 }

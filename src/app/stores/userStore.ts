@@ -5,8 +5,9 @@ interface UserData {
   userToken: string;
   name: string;
   email: string;
-  birthday_stamp: number,
-  country: string,
+  birthday_stamp: number;
+  country: string;
+  avatar?: string;
 }
 
 type UserStore = {

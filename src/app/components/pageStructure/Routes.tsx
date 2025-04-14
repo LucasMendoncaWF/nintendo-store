@@ -7,6 +7,7 @@ import PaymentPage from "../pages/Payment";
 import Product from "../pages/Product";
 import Store from "../pages/Store";
 import Support from "../pages/Support";
+import UserArea from "../pages/UserArea";
 import Wishlist from "../pages/Wishlist";
 import { Route, Routes } from 'react-router-dom';
 
@@ -22,6 +23,9 @@ export default function RoutesComponent () {
       <Route path="/product/:id" element={<Product />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/payment" element={<PaymentPage />} />
+      <Route path='/me' element={<UserArea />}>
+        {/*<Route index element={<UserArea />}/>*/}
+      </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>
   )

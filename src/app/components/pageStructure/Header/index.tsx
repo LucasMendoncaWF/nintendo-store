@@ -47,7 +47,7 @@ export default function Header() {
       {showUserMenu && isLoggedIn && 
         <div className='hide-mobile logged-menu' >
           <Link onClick={onClickLink} to='/wishlist'><div className="logged-link">Wishlist</div></Link>
-          <Link onClick={onClickLink}to='/configuration'><div className="logged-link">Configuration</div></Link>
+          <Link onClick={onClickLink} to='/me'><div className="logged-link">Configuration</div></Link>
           <Link to='#' onClick={() => {logout(); onClickLink();}}><div className="logged-link">Sign Out</div></Link>
         </div>
       }
@@ -63,7 +63,7 @@ export default function Header() {
             <Link onClick={onClickLink} to='/support'><div className="mobile-link">Support</div></Link> 
             <Link onClick={onClickLink} to='/coins'><div className="mobile-link">Coins</div></Link>
             {isLoggedIn && <Link onClick={onClickLink} to='/wishlist'><div className="mobile-link">Wishlist</div></Link>}
-            {isLoggedIn && <Link onClick={onClickLink} to='/configuration'><div className="mobile-link">Configuration</div></Link>}
+            {isLoggedIn && <Link onClick={onClickLink} to='/me'><div className="mobile-link">Configuration</div></Link>}
             {!isLoggedIn && 
               <Link to='#' onClick={() => {
                 toggleLoginModal(true);

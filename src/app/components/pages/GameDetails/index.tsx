@@ -124,7 +124,7 @@ export default function GameDetails () {
             <div className="game-detail__dlcs">
               <div className="game-detail__dlcs__title">Expansions</div>
               {game?.expanded_games?.map(expansionGame => 
-                <Link className="game-detail__dlc" to={`/game/${expansionGame.id}`}><div>{expansionGame.name}</div></Link>
+                <Link key={expansionGame.id} className="game-detail__dlc" to={`/game/${expansionGame.id}`}><li>{expansionGame.name}</li></Link>
               )}
             </div>
           }

@@ -2,7 +2,7 @@
 import api from "./api";
 import { useQuery } from "@tanstack/react-query";
 import QueryKeys from "./queryKeys";
-import { HomeBannerModel } from "app/models/homeBannerModel";
+import { HomeBannerModel } from "app/models/bannerModel";
 
 export function useGetHomeBanners() {
   return useQuery<HomeBannerModel[]>({

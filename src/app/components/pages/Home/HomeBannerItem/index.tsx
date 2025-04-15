@@ -1,4 +1,4 @@
-import { HomeBannerModel } from 'app/models/homeBannerModel';
+import { HomeBannerModel } from 'app/models/bannerModel';
 import { Link } from "react-router-dom";
 import './homeBannerItem.scss';
 

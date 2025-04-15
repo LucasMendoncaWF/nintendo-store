@@ -11,6 +11,7 @@ export default function Wishlist () {
   const [currentPage, setCurrentPage] = useState(1);
   const {wishlistItems} = useWishlistStore();
 
+  //Would get the games from a database table linked with the user if I could use a database on netlify
   const {
     data:games,
     isError,

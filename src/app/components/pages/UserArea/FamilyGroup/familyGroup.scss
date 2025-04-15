@@ -7,4 +7,36 @@
   @media screen and (max-width: 840px) {
     padding: 0;
   }
+
+  &__banner {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  &__title, &__subtitle {
+    width: 100%;
+    font-size: 22px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  &__code {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    margin-top: 50px;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+  }
+
+  .primary-button {
+    width: 100%;
+    padding: 20px;
+  }
 }

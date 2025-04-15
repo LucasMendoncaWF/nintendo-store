@@ -15,16 +15,15 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <React.StrictMode>
-      
-  <ErrorBoundary
-    FallbackComponent={SilentFallback}
-  >
+  <React.StrictMode>
+    <ErrorBoundary
+      FallbackComponent={SilentFallback}
+    >
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Main />
         </BrowserRouter>
       </QueryClientProvider>
-      </ErrorBoundary>
-    </React.StrictMode>
+    </ErrorBoundary>
+  </React.StrictMode>
 );

@@ -16,6 +16,7 @@ interface Props {
 export default function GameItem ({
   game,
 }: Props) {
+  // Would use a table to sava the cart and wishlist if this project was connected to a database
   const {onClickCart, cartItems} = useCartStore();
   const {onClickWishlist, wishlistItems} = useWishlistStore();
   const buttonRef = useRef<HTMLButtonElement>(null);

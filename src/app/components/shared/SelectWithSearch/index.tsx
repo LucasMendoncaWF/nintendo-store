@@ -45,11 +45,7 @@ export default function SelectWithSearch ({
       <input autoComplete="off" id={name} onFocus={() => setIsOpen(true)} value={value} name={name} onChange={(e) => onChange(e.target.value)} className={`primary-input ${className}`} />
       {isOpen &&
         <div className="select-with-search__options-modal">
-          {isLoading &&
-            <div className="d-flex justify-content-center">
-              <Loader />
-            </div>
-          }
+          {isLoading && <Loader />}
           {
             isError &&
             <ErrorMessage  message="An error occurred while fetching the countries" />

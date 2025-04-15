@@ -3,6 +3,7 @@ import { useGetProduct } from 'app/services/products';
 import './product.scss';
 import { useState } from 'react';
 import Loader from 'app/components/shared/Loader';
+import ErrorMessage from 'app/components/shared/ErrorMessage';
 
 export default function Product () {
   const params = useParams();
@@ -10,13 +11,20 @@ export default function Product () {
 
   const {
     isFetching,
+    isError,
     data: product,
   } = useGetProduct(params.id || '');
 
   if(isFetching) {
+    return <div className='margin-top-2 margin-bottom-2'>
+        <Loader />
+      </div>
+  }
+
+  if((isError || !product?.title) && !isFetching) {
     return <div className='d-flex justify-content-center'>
       <div className=' margin-top-2 margin-bottom-2'>
-        <Loader />
+        <ErrorMessage message='An error occurred while trying to get this product information.' />
       </div>
     </div>
   }

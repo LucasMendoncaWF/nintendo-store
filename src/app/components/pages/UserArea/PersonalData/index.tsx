@@ -37,7 +37,6 @@ export default function PersonalDataForm() {
     e.preventDefault();
   }
 
-
   return (
     <form onSubmit={onSubmitForm} className="personal-data d-flex wrap space-between">
       <div className='personal-data__field'>

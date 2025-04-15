@@ -46,7 +46,6 @@ export default function LoginForm() {
     setFields(newFields);
   }
 
-
   const onClose = () => {
     if(!isPending) {
       toggleLoginModal(false)

@@ -26,8 +26,8 @@ export default function CardForm({onSubmit}: Props) {
       if (!mm || !yy || mm.length !== 2 || yy.length !== 2) return false;
 
       const now = new Date();
-      const inputDate = new Date(Number('20' + yy), Number(mm) - 1); // mês começa do 0
-      const lastValidDate = new Date(now.getFullYear(), now.getMonth()); // mês atual
+      const inputDate = new Date(Number('20' + yy), Number(mm) - 1);
+      const lastValidDate = new Date(now.getFullYear(), now.getMonth());
 
       return inputDate >= lastValidDate;
     })();
@@ -44,6 +44,8 @@ export default function CardForm({onSubmit}: Props) {
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
     const validationError = validateForm();
+
+    //removes the error warnings after some time
     if (validationError.length) {
       setError(validationError);
       setTimeout(() => {
@@ -51,6 +53,7 @@ export default function CardForm({onSubmit}: Props) {
       }, 10000);
       return;
     }
+    
     setError([]);
     onSubmit({
       cardNumber,

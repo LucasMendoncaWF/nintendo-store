@@ -11,6 +11,7 @@ import CardForm from './CardForm';
 import { CardPaymentModel } from 'app/models/paymentModel';
 import { useMutation } from '@tanstack/react-query';
 import { cardPay } from 'app/services/payment';
+import { maxInCart } from 'app/constants/constants';
 import './payment.scss';
 
 type PaymentType = 'credit'|'debit'|'paypal'|'';
@@ -25,7 +26,7 @@ export default function PaymentPage () {
     data:games,
     isError: isErrorGames,
     isLoading: isLoadingGames
-  } = useGetCartGames({ids: cartItems, page: 1, pageLimit: 50});
+  } = useGetCartGames({ids: cartItems, page: 1, pageLimit: maxInCart});
 
   const {
       mutate: payMutation,
@@ -94,11 +95,7 @@ export default function PaymentPage () {
       <h3 className='payment-page__title'>Payment</h3>
       <div className='d-flex justify-content-center'>
         <div className='payment-page__content'>
-          {isLoadingGames &&
-            <div className='d-flex justify-content-center'>
-              <Loader />
-            </div>
-          }
+          {isLoadingGames && <Loader />}
           {cartIsEmpty && 
             <div className='d-flex justify-content-center wrap'>
               <ErrorMessage message='Your cart looks empty, you can add games here by clicking on the "Add to cart" button on them!' />
@@ -112,11 +109,11 @@ export default function PaymentPage () {
           }
           {isPaymentError && 
             <div className='d-flex payment-page__error justify-content-center wrap'>
-              <ErrorMessage type='small-rounded' message='An error occurred while trying to complete the payment, please try again.' />
+              <ErrorMessage type='small-popup' message='An error occurred while trying to complete the payment, please try again.' />
             </div>
           }
           {isPaymentPending &&
-            <div className='d-flex payment-page__pay-loading justify-content-center'>
+            <div className='payment-page__pay-loading'>
               <Loader />
             </div>
           }

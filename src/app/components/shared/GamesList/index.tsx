@@ -22,6 +22,10 @@ export default function GamesList ({
   isEmptyResponse,
   hasAutoScroll
 }: Props) {
+  
+  //TO DO - add a request to https://api.igdb.com/v4/genres and add a genre filter
+  //TO DO - same for multiplayer modes
+  
   useEffect(() => {
     if(hasAutoScroll) {
       window.scrollTo({behavior: 'smooth', top: 0});

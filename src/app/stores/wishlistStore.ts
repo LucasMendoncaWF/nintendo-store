@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+//this would be handled all on the BE with a database table
 type WishlistStore = {
   wishlistItems: number[];
   onClickWishlist: (gameId?: number) => void;

@@ -27,6 +27,7 @@ export default function GameDetails () {
     isFetching,
   } = useFetchGame(params.id || '');
 
+  //TO DO - create endpoint to similar games to unify this two calls on the BE
   const {
     data: gamesList,
     isError: isListError,
@@ -68,10 +69,7 @@ export default function GameDetails () {
   return (
     <div className="game-detail">
     <div>
-      {isFetching ?
-        <div className="d-flex justify-content-center">
-          <Loader />
-        </div>
+      {isFetching ? <Loader />
         :
         <div className="game-detail__banner">
           <img  className="game-detail__image" src={imageUrl} alt="game banner"/>

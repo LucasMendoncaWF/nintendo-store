@@ -19,6 +19,7 @@ export default function Coins () {
     setAppearCoin(true);
     if(amount < maxCoin) {
       isCollecting.current = true;
+      //this info would go to a database if I was able to use one on netlify
       sessionStorage.setItem('coins', (amount+amountPerClick).toFixed());
 
       setTimeout(() => {

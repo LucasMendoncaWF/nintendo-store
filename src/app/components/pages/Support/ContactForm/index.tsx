@@ -17,6 +17,7 @@ export default function ContactForm () {
     e.preventDefault();
     setIsLoading(true);
     //Pretend to send a message
+    //TO DO - create endpoint for this simulation
     setTimeout(() => {
       setFields(initialValue);
       setIsLoading(false);

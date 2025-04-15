@@ -2,7 +2,7 @@ import { maxInCart } from 'app/constants/constants';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-
+//this would be handled all on the BE with a database table
 type CartStore = {
   cartItems: number[];
   onClickCart: (gameId?: number) => void;

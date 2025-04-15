@@ -2,7 +2,7 @@ import './errorMessage.scss';
 
 interface Props {
   message: string;
-  type?: 'small-rounded';
+  type?: 'small-popup';
 }
 
 export default function ErrorMessage({message, type}: Props) {

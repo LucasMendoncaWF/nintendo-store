@@ -13,6 +13,7 @@ export default function Home () {
     isLoading,
   } = useGetRecentGamesList();
 
+  //No error treatment because this data is mocked
   const {
     data: banners,
     isLoading: isLoadingPrimaryBanner,
@@ -26,7 +27,7 @@ export default function Home () {
   return (
     <div className="home">
       {
-        (isLoadingSecondaryBanner || isLoadingPrimaryBanner) && <div className='d-flex justify-content-center'><Loader /></div>
+        (isLoadingSecondaryBanner || isLoadingPrimaryBanner) && <Loader />
       }
       <div className='d-flex wrap'>
         {banners?.map((banner, index) => (

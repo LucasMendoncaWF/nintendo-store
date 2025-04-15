@@ -14,6 +14,7 @@ export default function CartPage () {
   const [currentPage, setCurrentPage] = useState(1);
   const {cartItems} = useCartStore();
   
+  //would be getting those cartItems from ta table if I was using a real database
   const {
     data:games,
     isError,
@@ -28,17 +29,14 @@ export default function CartPage () {
   games?.forEach(game => {
     totalPrice += Number(game.price);
   });
+
   const showList = !isError && !isLoading && games?.length;
   return (
     <div className="cart-page">
       <h3 className='cart-page__title'>Cart</h3>
       <div className='d-flex justify-content-center'>
         <div className='cart-page__content'>
-          {isLoading &&
-            <div className='d-flex justify-content-center'>
-              <Loader />
-            </div>
-          }
+          {isLoading && <Loader />}
           {!games?.length && !isLoading && 
             <div className='d-flex justify-content-center wrap'>
               <ErrorMessage message='Your cart looks empty, you can add games here by clicking on the "Add to cart" button on them!' />

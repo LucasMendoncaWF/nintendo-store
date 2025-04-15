@@ -5,14 +5,14 @@ import './userArea.scss';
 
 export default function UserArea() {
   const location = useLocation();
-  const currentPath = location.pathname?.split('me')[1];
   const {userData, isLoggedIn} = useUserStore();
+  const currentPath = location.pathname?.split('me')[1];
+  const isPersonalData = currentPath === '';
 
   if(!isLoggedIn) {
     return <Navigate to='/' />
   }
 
-  const isPersonalData = currentPath === '';
   return (
     <div className="user-area">
       <div className="user-area__tab-links">

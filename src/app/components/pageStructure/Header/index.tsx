@@ -65,6 +65,7 @@ export default function Header() {
             <Link onClick={onClickLink} to='/coins'><div className="mobile-link">Coins</div></Link>
             {isLoggedIn && <Link onClick={onClickLink} to='/wishlist'><div className="mobile-link">Wishlist</div></Link>}
             {isLoggedIn && <Link onClick={onClickLink} to='/me'><div className="mobile-link">Configuration</div></Link>}
+            {isLoggedIn && <Link onClick={onClickLink} to='/me/orders'><div className="mobile-link">Orders</div></Link>}
             {!isLoggedIn && 
               <Link to='#' onClick={() => {
                 toggleLoginModal(true);

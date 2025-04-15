@@ -16,7 +16,7 @@
     letter-spacing: 2px;
     color: $gray;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 840px) {
       margin-top: 30px;
       padding: 0 25px 60px;
     }
@@ -76,7 +76,7 @@
       padding: 50px 10%;
     }
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 840px) {
       margin-bottom: 0px;
       padding: 50px 25px;
       display: block;
@@ -93,7 +93,7 @@
       transition: 0.4s;
       margin-left: 100px;
 
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 840px) {
         margin-top: 120px;
         width: 100%;
         margin-left: 0;
@@ -115,7 +115,7 @@
       width: 300px;
       margin-bottom: -120px;
 
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 840px) {
         margin-left: calc(50% - 150px);
         margin-top: -140px;
       }

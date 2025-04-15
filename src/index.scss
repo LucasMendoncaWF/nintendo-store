@@ -49,20 +49,20 @@ a {
 }
 
 .hide-mobile {
-  @media (max-width: 800px) {
+  @media (max-width: 840px) {
     display: none;
   }
 }
 
 .show-mobile {
-  @media (min-width: 800px) {
+  @media (min-width: 840px) {
     display: none;
   }
 }
 
 .container {
   margin: 20px;
-  @media (max-width: 800px) {
+  @media (max-width: 840px) {
     margin: 15px;
   }
 }
@@ -82,7 +82,7 @@ h1, h2, h3, h4 {
 .margin-top-2 {
   margin-top: 50px;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 840px) {
     margin-top: 25px;
   }
 }
@@ -90,13 +90,51 @@ h1, h2, h3, h4 {
 .margin-bottom-2 {
   margin-bottom: 50px;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 840px) {
     margin-bottom: 25px;
   }
 }
 
 .link-disabled div{
   cursor: not-allowed !important;
+}
+
+.primary-button {
+  background-color: $primary;
+  color: $white;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.4px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid $white;
+
+  &:hover {
+    opacity: 0.8;
+    border: 2px solid $black;
+  }
+}
+
+.secondary-button {
+  background-color: $white;
+  color: $black;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.4px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid $primary;
+
+  &:hover {
+    opacity: 0.8;
+    border: 2px solid $black;
+  }
 }
 
 .primary-input {

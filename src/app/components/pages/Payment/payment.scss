@@ -12,7 +12,7 @@
   &__content {
     min-height: calc(100vh - 200px);
     width: 100%;
-    max-width: 800px;
+    max-width: 840px;
     background-color: $white;
     position: relative;
     padding-bottom: 54px;
@@ -25,7 +25,7 @@
     font-weight: bold;
     border-bottom: 2px solid $gray;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 840px) {
       padding: 20px;
     }
   }

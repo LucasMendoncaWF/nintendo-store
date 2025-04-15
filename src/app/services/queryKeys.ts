@@ -6,6 +6,8 @@ enum QueryKeys {
   primaryBanner= "PRIMARY_BANNER",
   secondaryBanner= "SECONDARY_BANNER",
   product= "PRODUCT",
+  orders="ORDERS",
+  countries="COUNTRIES"
 }
 
 export default QueryKeys;

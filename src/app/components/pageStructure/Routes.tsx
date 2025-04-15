@@ -8,6 +8,9 @@ import Product from "../pages/Product";
 import Store from "../pages/Store";
 import Support from "../pages/Support";
 import UserArea from "../pages/UserArea";
+import FamilyGroup from "../pages/UserArea/FamilyGroup";
+import Orders from "../pages/UserArea/Orders";
+import PersonalDataForm from "../pages/UserArea/PersonalData";
 import Wishlist from "../pages/Wishlist";
 import { Route, Routes } from 'react-router-dom';
 
@@ -24,7 +27,9 @@ export default function RoutesComponent () {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/payment" element={<PaymentPage />} />
       <Route path='/me' element={<UserArea />}>
-        {/*<Route index element={<UserArea />}/>*/}
+        <Route index element={<PersonalDataForm />} />
+        <Route path='/me/orders' element={<Orders />} />
+        <Route path='/me/family' element={<FamilyGroup />} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>

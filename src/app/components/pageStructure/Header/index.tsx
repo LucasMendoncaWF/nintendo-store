@@ -36,18 +36,19 @@ export default function Header() {
           </div>
         </Link>
       : 
-        <Link to='#' onClick={() => setShowUserMenu(!showUserMenu)} className='hide-mobile'>
+        <button onClick={() => setShowUserMenu(!showUserMenu)} className='hide-mobile logged-in-button'>
           <div className='sign-in d-flex align-center'>
           <img className='sign-in-icon' src={userIcon} alt="user icon to sign in" />
           <p>{userData?.name}</p>
           </div>
-        </Link>
+        </button>
       }
 
       {showUserMenu && isLoggedIn && 
         <div className='hide-mobile logged-menu' >
           <Link onClick={onClickLink} to='/wishlist'><div className="logged-link">Wishlist</div></Link>
           <Link onClick={onClickLink} to='/me'><div className="logged-link">Configuration</div></Link>
+          <Link onClick={onClickLink} to='/me/orders'><div className="logged-link">Orders</div></Link>
           <Link to='#' onClick={() => {logout(); onClickLink();}}><div className="logged-link">Sign Out</div></Link>
         </div>
       }

@@ -20,10 +20,6 @@ export default function PaymentPage () {
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const {isLoggedIn} = useUserStore();
   const {cartItems, emptyCart} = useCartStore();
-
-  if(!isLoggedIn) {
-    <Navigate to='/' />
-  }
   
   const {
     data:games,
@@ -38,6 +34,9 @@ export default function PaymentPage () {
       reset: resetPaymentMutation
     } = useMutation({
       async mutationFn (data: CardPaymentModel) {
+        if(!isLoggedIn) {
+          return;
+        }
         return await cardPay(data);
       },
       onSettled(){
@@ -55,6 +54,10 @@ export default function PaymentPage () {
   games?.forEach(game => {
     totalPrice += Number(game.price);
   });
+
+  if(!isLoggedIn) {
+    return <Navigate to='/' />
+  }
 
   const onClickItem = (paymentType: PaymentType) => {
     setItemOpen(paymentType === itemOpen ? '' : paymentType);

@@ -109,7 +109,7 @@ export default function CardForm({onSubmit}: Props) {
       />
 
       <div className="card-form__pay-button d-flex">
-        <button type="submit">
+        <button className='primary-button' type="submit">
           Pay
         </button>
       </div>

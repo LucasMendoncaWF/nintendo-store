@@ -38,8 +38,9 @@ exports.handler = async (event) => {
         name: 'Clark',
         lastName: 'Kent',
         email: validEmail,
-        birthday_stamp: new Date('02/29/1979').toTimeString(),
+        birthday_stamp: new Date('02-26-1979').toISOString().split('T')[0],
         country: 'United States',
+        id: 1,
       }),
     };
   } catch (err) {

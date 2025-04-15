@@ -1,0 +1,33 @@
+@use 'assets/styles/variables.scss' as *;
+
+.personal-data {
+  width: 100%;
+
+  button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  &__field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &__select {
+    width: 100% !important;
+  }
+
+  &__input {
+    margin-bottom: 0;
+  }
+
+  &__deactivate {
+    padding: 5px 15px;
+    font-size: 10px;
+  }
+}

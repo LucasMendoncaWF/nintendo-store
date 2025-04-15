@@ -5,7 +5,7 @@
   text-align: left;
   flex-wrap: wrap;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 840px) {
     display: block;
     padding: 25px 30px;
   }
@@ -13,7 +13,7 @@
   &__container {
     width: 40vw;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 840px) {
       width: 100%;
       margin-bottom: 40px;
     }
@@ -27,7 +27,7 @@
     font-weight: bold;
     font-size: 25px;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 840px) {
       font-size: 22px;
     }
   }

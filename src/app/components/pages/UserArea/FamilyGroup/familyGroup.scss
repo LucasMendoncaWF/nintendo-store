@@ -1,0 +1,10 @@
+@use 'assets/styles/variables.scss' as *;
+
+.family-group {
+  padding: 30px;
+  max-width: 600px;
+
+  @media screen and (max-width: 840px) {
+    padding: 0;
+  }
+}

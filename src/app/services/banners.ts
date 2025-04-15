@@ -1,8 +1,8 @@
 
-import { HomeBannerModel } from "app/models/HomeBannerModel";
 import api from "./api";
 import { useQuery } from "@tanstack/react-query";
 import QueryKeys from "./queryKeys";
+import { HomeBannerModel } from "app/models/homeBannerModel";
 
 export function useGetHomeBanners() {
   return useQuery<HomeBannerModel[]>({

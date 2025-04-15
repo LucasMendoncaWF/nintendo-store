@@ -1,0 +1,32 @@
+@use 'assets/styles/variables.scss' as *;
+
+.select-with-search {
+  position: relative;
+
+  &__options-modal {
+    padding: 20px;
+    position: absolute;
+    background-color: $white;
+    width: calc(100% - 40px);
+    top: calc(100% - 10px);
+    max-height: 300px;
+    overflow: auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0, 0.4);
+  }
+
+  &__option {
+    padding: 10px;
+    margin: 5px;
+    background-color: $primary;
+    color: $white;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

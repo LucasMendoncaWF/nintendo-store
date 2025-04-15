@@ -4,10 +4,12 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 interface UserData {
   userToken: string;
   name: string;
+  lastName: string;
   email: string;
-  birthday_stamp: number;
+  birthday_stamp: string;
   country: string;
   avatar?: string;
+  id: number;
 }
 
 type UserStore = {

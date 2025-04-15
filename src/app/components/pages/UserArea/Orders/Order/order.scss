@@ -1,0 +1,12 @@
+@use 'assets/styles/variables.scss' as *;
+
+.order {
+  padding: 10px 15px;
+  background-color: $white;
+  width: calc(100% - 30px);
+  border-bottom: 1px solid $light-gray;
+
+  &:first-of-type {
+    border-top: 1px solid $light-gray;
+  }
+}

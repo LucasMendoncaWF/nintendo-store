@@ -9,7 +9,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 840px) {
     width: 100%;
   }
 
@@ -33,7 +33,7 @@
     &:hover {
       top: 25%;
 
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 840px) {
         top: 10%;
       }
     }
@@ -80,7 +80,7 @@
     font-size: 24px;
     margin-top: -30px;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 840px) {
       margin-top: -10px;
     }
   }

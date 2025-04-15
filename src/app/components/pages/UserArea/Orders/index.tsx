@@ -17,6 +17,7 @@ export default function Orders () {
   console.log(orders)
   return (
     <div className='orders-page'>
+      <div className='show-mobile orders-page__title'>Your Orders</div>
       {isLoading &&
         <div className='d-flex justify-content-center'>
           <Loader />

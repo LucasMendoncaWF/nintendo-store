@@ -1,21 +1,19 @@
+import CartFloat from '../CartFloat';
 import Footer from '../Footer';
 import Header from '../Header';
-import RoutesComponent from '../Routes';
 import LoginForm from '../LoginForm';
-import CartFloat from '../CartFloat';
+import RoutesComponent from '../Routes';
 
 export default function Main() {
-  
   return (
     <>
       <LoginForm />
-      <Header/>
+      <Header />
       <CartFloat />
-      <div className='main'>
+      <div className="main">
         <RoutesComponent />
       </div>
       <Footer />
     </>
-    
-  )
+  );
 }

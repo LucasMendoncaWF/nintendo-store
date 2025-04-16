@@ -1,5 +1,3 @@
-
-
 exports.handler = async (event) => {
   const CORS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
@@ -21,7 +19,8 @@ exports.handler = async (event) => {
     const { userName, password } = JSON.parse(event.body);
 
     const validEmail = 'userlogin@test.com';
-    const validPasswordHash = 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae';
+    const validPasswordHash =
+      'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae';
 
     if (userName !== validEmail || password !== validPasswordHash) {
       throw new Error();
@@ -33,7 +32,7 @@ exports.handler = async (event) => {
         ...CORS_HEADERS,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         userToken: 'mockUserToken'.toString(),
         name: 'Clark',
         lastName: 'Kent',

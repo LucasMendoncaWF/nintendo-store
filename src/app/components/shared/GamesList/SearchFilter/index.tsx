@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import searchIcon from 'assets/images/search.png';
 import { useSearchParams } from 'react-router-dom';
+
+import searchIcon from 'assets/images/search.png';
+
 import './searchFilter.scss';
 
 interface Props {
@@ -9,35 +11,42 @@ interface Props {
 }
 
 let timeout: ReturnType<typeof setTimeout>;
-export default function SearchFilter ({onSetSearchTerm}: Props) {
+export default function SearchFilter({ onSetSearchTerm }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [internSearchTerm, setInternSearchTerm] = useState<string | undefined>(undefined);
+  const [internSearchTerm, setInternSearchTerm] = useState<string | undefined>(
+    undefined,
+  );
   const addedFromUrl = useRef(false);
 
   useEffect(() => {
-    if(timeout) {
+    if (timeout) {
       clearTimeout(timeout);
     }
     timeout = setTimeout(() => {
-      if(internSearchTerm !== undefined) {
+      if (internSearchTerm !== undefined) {
         onSetSearchTerm(internSearchTerm);
-        setSearchParams(internSearchTerm ? {searchQuery: internSearchTerm} : {});
+        setSearchParams(
+          internSearchTerm ? { searchQuery: internSearchTerm } : {},
+        );
       }
     }, 300);
   }, [internSearchTerm, onSetSearchTerm, setSearchParams]);
 
   useEffect(() => {
     const value = searchParams.get('searchQuery');
-    if(value && !internSearchTerm && !addedFromUrl.current) {
+    if (value && !internSearchTerm && !addedFromUrl.current) {
       setInternSearchTerm(value);
-      addedFromUrl.current=true;
+      addedFromUrl.current = true;
     }
-  }, [searchParams, internSearchTerm])
+  }, [searchParams, internSearchTerm]);
 
   return (
-    <div className='search-input'>
-      <input value={internSearchTerm} onChange={(e) => setInternSearchTerm(e.target.value)} />
+    <div className="search-input">
+      <input
+        value={internSearchTerm}
+        onChange={(e) => setInternSearchTerm(e.target.value)}
+      />
       <img src={searchIcon} alt="search input" />
     </div>
-  )
+  );
 }

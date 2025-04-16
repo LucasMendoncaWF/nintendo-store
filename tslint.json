@@ -1,0 +1,43 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+      "ordered-imports": [
+        true,
+        {
+          "grouped-imports": true,
+          "groups": [
+            {
+              "name": "react",
+              "match": "^react",
+              "order": 1
+            },
+            {
+              "name": "externals",
+              "match": "^[a-z]",
+              "order": 2
+            },
+            {
+              "name": "internals",
+              "match": "^@/",
+              "order": 3
+            },
+            {
+              "name": "relative",
+              "match": "^[./]",
+              "order": 4
+            },
+            {
+              "name": "styles",
+              "match": "\\.scss$",
+              "order": 5
+            }
+          ]
+        }
+      ]
+    },
+    "rulesDirectory": []
+}

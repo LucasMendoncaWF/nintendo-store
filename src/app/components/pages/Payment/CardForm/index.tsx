@@ -1,13 +1,15 @@
-import { IMask, IMaskInput } from 'react-imask';
-import "./cardForm.scss";
 import { useState } from 'react';
+import { IMask, IMaskInput } from 'react-imask';
+
 import { CardPaymentModel } from 'app/models/paymentModel';
+
+import './cardForm.scss';
 
 interface Props {
   onSubmit: (data: CardPaymentModel) => void;
 }
 
-export default function CardForm({onSubmit}: Props) {
+export default function CardForm({ onSubmit }: Props) {
   const [cardNumber, setCardNumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvc, setCvc] = useState('');
@@ -33,10 +35,14 @@ export default function CardForm({onSubmit}: Props) {
     })();
 
     const validationErrors = [];
-    if (!nameValid) validationErrors.push("Please enter a valid name (at least 3 characters).");
-    if (!cardValid) validationErrors.push("Card number must be 16 digits.");
-    if (!expiryValid) validationErrors.push("Expiration date is invalid or in the past.");
-    if (!cvcValid) validationErrors.push("CVC must be 3 or 4 digits.");
+    if (!nameValid)
+      validationErrors.push(
+        'Please enter a valid name (at least 3 characters).',
+      );
+    if (!cardValid) validationErrors.push('Card number must be 16 digits.');
+    if (!expiryValid)
+      validationErrors.push('Expiration date is invalid or in the past.');
+    if (!cvcValid) validationErrors.push('CVC must be 3 or 4 digits.');
 
     return validationErrors;
   };
@@ -45,7 +51,7 @@ export default function CardForm({onSubmit}: Props) {
     e.preventDefault();
     const validationError = validateForm();
 
-    //removes the error warnings after some time
+    // removes the error warnings after some time
     if (validationError.length) {
       setError(validationError);
       setTimeout(() => {
@@ -53,7 +59,7 @@ export default function CardForm({onSubmit}: Props) {
       }, 10000);
       return;
     }
-    
+
     setError([]);
     onSubmit({
       cardNumber,
@@ -64,7 +70,10 @@ export default function CardForm({onSubmit}: Props) {
   };
 
   return (
-    <form onSubmit={onSubmitForm} className="card-form d-flex wrap space-between">
+    <form
+      onSubmit={onSubmitForm}
+      className="card-form d-flex wrap space-between"
+    >
       <input
         type="text"
         placeholder="Card Holder Name"
@@ -103,7 +112,7 @@ export default function CardForm({onSubmit}: Props) {
         required
       />
       <IMaskInput
-        mask="0000" 
+        mask="0000"
         value={cvc}
         onAccept={(value) => setCvc(value)}
         placeholder="CVC"
@@ -112,15 +121,17 @@ export default function CardForm({onSubmit}: Props) {
       />
 
       <div className="card-form__pay-button d-flex">
-        <button className='primary-button' type="submit">
+        <button className="primary-button" type="submit">
           Pay
         </button>
       </div>
-      {!!errors.length && 
+      {!!errors.length && (
         <div className="card-form__error-message">
-          {errors.map((error, index) => <li key={index}>{error}</li>)}
+          {errors.map((error, index) => (
+            <li key={index}>{error}</li>
+          ))}
         </div>
-        }
+      )}
     </form>
   );
 }

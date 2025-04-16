@@ -1,14 +1,19 @@
+import { Link } from 'react-router-dom';
+
 import { HomeBannerModel } from 'app/models/bannerModel';
-import { Link } from "react-router-dom";
+
 import './homeBannerItem.scss';
 
 interface Props {
   banner: HomeBannerModel;
 }
 
-export default function HomeBannerItem ({banner}: Props) {
+export default function HomeBannerItem({ banner }: Props) {
   return (
-    <div className="home-banner" style={{backgroundImage: `url(${banner.image})`}}>
+    <div
+      className="home-banner"
+      style={{ backgroundImage: `url(${banner.image})` }}
+    >
       <Link to={banner.url}>
         <div className="home-banner__text">
           <div className="home-banner__title">{banner.buttonText}</div>
@@ -19,5 +24,5 @@ export default function HomeBannerItem ({banner}: Props) {
         </div>
       </Link>
     </div>
-  )
+  );
 }

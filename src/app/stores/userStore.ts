@@ -19,7 +19,7 @@ type UserStore = {
   logout: () => void;
   toggleLoginModal: (value: boolean) => void;
   isLoggedIn: boolean;
-}
+};
 
 export const useUserStore = create<UserStore>()(
   persist(
@@ -29,17 +29,17 @@ export const useUserStore = create<UserStore>()(
       isLoggedIn: false,
       login: (userData) => {
         localStorage.setItem('userData', JSON.stringify(userData));
-        set({userData, isLoggedIn: true});
+        set({ userData, isLoggedIn: true });
       },
       logout: () => {
         localStorage.removeItem('userData');
-        set({userData: null, isLoggedIn: false});
+        set({ userData: null, isLoggedIn: false });
       },
-      toggleLoginModal: (isLoginModalOpen) => set({isLoginModalOpen})
+      toggleLoginModal: (isLoginModalOpen) => set({ isLoginModalOpen }),
     }),
     {
       name: 'nintendo-user-data',
       storage: createJSONStorage(() => sessionStorage),
-    }
-  )
-)
+    },
+  ),
+);

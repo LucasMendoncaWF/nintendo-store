@@ -108,16 +108,18 @@ export default function PersonalDataForm() {
         />
       </div>
 
-      <button disabled className="primary-button" type="submit">
-        Save
-      </button>
-      <button
-        disabled
-        className="personal-data__deactivate secondary-button"
-        type="button"
-      >
-        Deactivate account
-      </button>
+      <div className='d-flex space-between'>
+        <button disabled className="primary-button" type="submit">
+          Save
+        </button>
+        <button
+          disabled
+          className="personal-data__deactivate secondary-button"
+          type="button"
+        >
+          Deactivate account
+        </button>
+      </div>
     </form>
   );
 }

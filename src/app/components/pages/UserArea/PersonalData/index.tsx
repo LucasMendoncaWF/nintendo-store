@@ -108,7 +108,7 @@ export default function PersonalDataForm() {
         />
       </div>
 
-      <div className='d-flex space-between'>
+      <div className='d-flex space-between personal-data__buttons'>
         <button disabled className="primary-button" type="submit">
           Save
         </button>

@@ -120,7 +120,7 @@
     max-width: 500px;
     font-size: 18px;
     letter-spacing: 2px;
-
+    margin-bottom: 20px;
 
     @media screen and (max-width: 840px) {
       padding: 0 15px 20px 15px;
@@ -147,8 +147,8 @@
         max-width: 600px;
       }
 
-      @media screen and (max-width: 1250px) {
-        max-width: 500px;
+      @media screen and (max-width: 840px) {
+        max-width: calc(100vw - 20px);
       }
 
       .dot {

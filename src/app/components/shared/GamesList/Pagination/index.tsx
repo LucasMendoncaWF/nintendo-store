@@ -58,7 +58,7 @@ export default function Pagination({
   return (
     <div className="d-flex pagination justify-content-center">
       <button
-        className="pagination__arrow"
+        className="pagination__arrow hide-mobile"
         onClick={() => currentPage > 1 && onPageChange(1)}
       >
         &lt;&lt;
@@ -88,7 +88,7 @@ export default function Pagination({
         &gt;
       </button>
       <button
-        className="pagination__arrow"
+        className="pagination__arrow hide-mobile"
         onClick={() =>
           currentPage < Math.ceil(lastPage) && onPageChange(lastPage)
         }

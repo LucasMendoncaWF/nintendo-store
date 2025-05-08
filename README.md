@@ -1,7 +1,21 @@
-Run npm start to test it or access the url: https://nintendostorebylucasmendonca.netlify.app/
+[Nintendo Store](https://nintendostorebylucasmendonca.netlify.app/)
 
-That's a demonstration project that I made, simulating a Nintendo Website, using the IGDB API to get games information.
+# 🎮 Nintendo eShop – Concept Redesign
 
-The rest of the data is mocked as i'm not using a DB on this demo.
+This is a **conceptual redesign** of the **Nintendo eShop**, built using [React](https://reactjs.org/). The goal is to explore a cleaner, more modern user experience for browsing and purchasing digital games.
 
-![image](https://github.com/user-attachments/assets/64764113-c49a-4424-a8f8-7492aa37dfdd)
+🧪 **Concept project – for educational and portfolio purposes only**  
+[Nintendo Store](https://nintendostorebylucasmendonca.netlify.app/)
+
+## ✨ Features
+- 🎨 Fully redesigned user interface
+- 🔍 Game search with filters (genre, platform, price, etc.)
+- 🖼️ Game detail pages with screenshots and trailers
+- 🛒 Shopping cart functionality *simulated*
+- 📱 Responsive design for mobile and desktop
+
+## 🚀 Tech Stack
+
+- React
+- Scss
+- Mock APIs and [IGDB](https://api-docs.igdb.com/)

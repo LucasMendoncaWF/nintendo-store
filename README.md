@@ -19,3 +19,5 @@ This is a **conceptual redesign** of the **Nintendo eShop**, built using [React]
 - React
 - Scss
 - Mock APIs and [IGDB](https://api-docs.igdb.com/)
+- Zustand
+- Netlify for deployment
